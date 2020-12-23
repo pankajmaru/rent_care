@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 id="btn"> Tenant List </h1>
+                    <h1 id="btn">Rooms List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -35,8 +35,7 @@
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>{{ session('success') }}</strong>
                           </div>
-                          @endif
-                          
+                          @endif                          
                           <div class="card-header">
                             <nav class="navbar navbar-light">
                                 <form class="form-inline" role="form" action="" method="get">

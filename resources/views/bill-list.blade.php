@@ -62,10 +62,8 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Room Number</th>
-                                    <th>Bill Number</th>
-                                    <th>Bill Amount</th>
-                                    <th>Bill Created</th>
-                                    <th>Status</th>
+                                    <th>Invoice Number</th>                                                                     
+                                    {{-- <th>Net Amount</th>                                                                      --}}
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -74,19 +72,17 @@
                                 $i = 1;
                                 @endphp
                                 @foreach ($bills as $bill)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $bill->id }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr>                                    
+                                    <td>{{ $i++ }}</td>                                    
+                                    <td>{{ $bill->id }}</td>                                    
+                                    <td>{{ $bill->name->first_name }}</td>
+                                    <td>{{ $bill->room->room_number }}</td>                              
+                                    <td>{{ $bill->invoice_number }}</td>
+                                    {{-- <td>{{ $bill->net_amount  }}</td> --}}
                                     <td>
-                                        <a href="#" type="button" class="btn btn-danger">View</a>
-                                        <a href="#" type="button" class="btn btn-success">Edit</a>
-                                        <a href="#" type="button" class="btn btn-primary">Delete</a>
+                                        <a href="{{ route('bill-view',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>
+                                        <a href="{{ route('bill-edit',[$bill->id]) }}" type="button" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('tenant-delete', [$bill->id]) }}" type="button" class="btn btn-primary">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

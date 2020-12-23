@@ -64,8 +64,9 @@
                                     <div class="form-group col-md-6">
                                         <label>Room Number</label>
                                         <select name="room_id" class="form-control">
-                                            <option value="{{ $users->get_room->room_id }}">
-                                                {{ $users->get_room->room_number ??'null' }}</option>
+                                            @foreach ($rooms as $room)
+                                            <option value="{{ $room->room_id }}" @php echo ($room->room_id == $users->room_id ) ? 'selected':''  @endphp>{{ $room->room_number }}</option>
+                                            @endforeach
                                         </select>
                                         @if ($errors->has('room_id'))
                                         <span style="color:red;">{{ $errors->first('room_id') }}</span>

@@ -18,13 +18,13 @@ class BillsController extends Controller
      */
     public function index()
     {
-        $bills = Bill::get();
-        $users = User::get();
-        $rooms = Room::get();
+        $bills = Bill::all();
+        $users = User::all();
+        $rooms = Room::all();
         return view('bill-list',['bills'=>$bills,'users'=>$users,'rooms'=>$rooms]);
     }
 
-    /**
+    /**s
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -43,23 +43,26 @@ class BillsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
-        // $validated = $request->validate([
-            //     'name' => 'required',
-            //     'room_number' => 'required',
-            //     'bill_number' => 'required',
-            //     'mobile_number' => 'required',
-            //     'from_date' => 'required',
-            //     'to_date' => 'required',
-            //     'rent_amount' => 'required',
-            //     'electricity_unit' => 'required',
-            //     'water_unit' => 'required'
-            // ]);
-        $bills = new Bill;
-        $bills->bill_number = $request->bill_number;
+    {           
+        $validated = $request->validate([
+            'user_id' => 'required',
+            'room_number' => 'required',
+            'invoice_number' => 'required|min:3',
+            'mobile_number' => 'required|max:10',
+            'from_date' => 'required',
+            'to_date' => 'required',
+            'rent_amount' => 'required',
+            'electricity_unit' => 'required',
+            'water_unit' => 'required',
+            ]);
+        $bills = new Bill;        
+        $bills->user_id = $request->user_id;
+        $bills->room_id = $request->room_number;
+        $bills->invoice_number = $request->invoice_number;
         $bills->electricity_unit = $request->electricity_unit;
         $bills->water_unit = $request->water_unit;
+        $bills->from_date = $request->from_date;
+        $bills->to_date = $request->to_date;
         $bills->save();
         return redirect()->route('bill-index')->with('success', 'Bill Created Successfully');
     }
@@ -72,7 +75,8 @@ class BillsController extends Controller
      */
     public function show($id)
     {
-        //
+        $bills = Bill::find($id);
+        return view('bill-view',['bills'=>$bills]);
     }
 
     /**
@@ -83,7 +87,10 @@ class BillsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bills = Bill::find($id);
+        $users = User::all();
+        $rooms = Room::all();
+        return view('bill-edit',['bills'=>$bills,'users'=>$users,'rooms'=>$rooms]);
     }
 
     /**
@@ -108,4 +115,5 @@ class BillsController extends Controller
     {
         //
     }
+
 }

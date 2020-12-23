@@ -12,6 +12,5 @@ class User extends Authenticatable
     public function get_room(){
 
         return $this->belongsTo('App\Room','room_id','room_id');
-    }  
-
+    }
 }

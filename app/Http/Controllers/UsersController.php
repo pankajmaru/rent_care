@@ -88,7 +88,8 @@ class UsersController extends Controller
     public function edit(Request $request, $id)
     {
         $users = User::find($id);        
-        return view('edit-tenant', ['users'=>$users]);
+        $rooms = Room::all();                
+        return view('edit-tenant', ['users'=>$users,'rooms'=>$rooms]);
     }
 
     /**

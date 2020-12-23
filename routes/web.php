@@ -27,7 +27,6 @@ Auth::routes();
       Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete');   
    });
 
-   
    Route::group(['prefix'=>'room'], function(){
       Route::any('add', 'RoomsController@create')->name('room-add');
       Route::any('edit/{id}', 'RoomsController@edit')->name('room-edit');
@@ -40,5 +39,7 @@ Auth::routes();
       Route::any('create','BillsController@create')->name('bill-create');
       Route::any('index','BillsController@index')->name('bill-index');
       Route::any('store','BillsController@store')->name('bill-store');
+      Route::any('show/{id}','BillsController@show')->name('bill-view');
+      Route::any('edit/{id}','BillsController@edit')->name('bill-edit');
    });
 

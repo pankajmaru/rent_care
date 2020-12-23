@@ -39,14 +39,20 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('room-add') }}" class="nav-link">
-                          <i class="nav-icon far fa-image"></i>
+                    <a href="{{ route('tenant-create') }}" class="nav-link">                          
+                        <i class="nav-icon fas fa-user-plus"></i>
+                        <p>Add Tenant</p>
+                    </a>
+                </li>
+                  <li class="nav-item">
+                      <a href="{{ route('room-add') }}" class="nav-link">                          
+                          <i class="nav-icon fas fa-user-plus"></i>
                           <p>Add Room</p>
                       </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('room-index') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                    <a href="{{ route('room-index') }}" class="nav-link">                        
+                        <i class="nav-icon fas fa-stream"></i>
                         <p>Rooms Lists</p>
                     </a>
                 </li>
@@ -57,8 +63,8 @@
                     </a>
                 </li>                  
                   <li class="nav-item">
-                      <a href="{{ route('bill-index') }}" class="nav-link">
-                          <i class="nav-icon far fa-image"></i>
+                      <a href="{{ route('bill-index') }}" class="nav-link">                          
+                          <i class="nav-icon fas fa-list-ol"></i>
                           <p>Bill-Lists</p>
                       </a>
                   </li>                
