@@ -3,15 +3,15 @@
 use Illuminate\Database\Seeder;
 use App\Product;
 
-class DatabaseSeeder extends Seeder
+class ProductTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-         $this->call(ProductTableSeeder::class);
+        factory(Product::class, 50)->create();
     }
 }

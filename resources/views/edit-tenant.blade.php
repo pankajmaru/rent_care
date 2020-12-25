@@ -39,8 +39,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="First Name"
-                                            name="first_name" value="{{ $users->first_name }}">
+                                        <input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{ $users->first_name }}">
                                         @if ($errors->has('first_name'))
                                         <span style="color:red;">{{ $errors->first('first_name') }}</span>
                                         @endif
@@ -72,23 +71,6 @@
                                         <span style="color:red;">{{ $errors->first('room_id') }}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label>From Date</label>
-                                        <input type="date" class="form-control" placeholder="From Date" name="from_date"
-                                            value="{{ $users->from_date }}">
-                                        @if ($errors->has('from_date'))
-                                        <span style="color:red;">{{ $errors->first('from_date') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>To Date</label>
-                                        <input type="date" class="form-control" placeholder="To Date" name="to_date"
-                                            value="{{ $users->to_date }}">
-                                        @if ($errors->has('to_date'))
-                                        <span style="color:red;">{{ $errors->first('to_date') }}</span>
-                                        @endif
-                                    </div>
-
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

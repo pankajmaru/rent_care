@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>General Form</h1>
+                    <h1>View Tenant Details</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">General Form</li>
+                        <li class="breadcrumb-item active">View Tenant Details</li>
                     </ol>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">New Tenant Details </h3>
+                            <h3 class="card-title"> View Tenant Details </h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -60,16 +60,6 @@
                                         <input type="text" class="form-control" placeholder="Room Number"
                                             name="room_number" value="{{ $user->get_room->room_number ?? 'null'  }}" disabled>
                                         <span style="color:red;"></span>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>From Date</label>                                                                        
-                                        <input type="date" class="form-control" placeholder="From Date"
-                                            name="from_date"  value="{{ $user->from_date  }}" disabled>                                                                                                                        
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>To Date</label>                                                                        
-                                        <input type="date" class="form-control" placeholder="To Date"
-                                            name="to_date"  value="{{ $user->to_date  }}" disabled>                                                                                                                        
                                     </div>
                                 </div>
                                 <!-- /.card-body -->                                

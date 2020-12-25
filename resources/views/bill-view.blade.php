@@ -33,7 +33,7 @@
                      <div class="col-12">
                         <h4>
                            <i class="fas fa-globe"></i> Rent Care
-                           <small class="float-right"></small>
+                           <small class="float-right">Invoice Date: <span class="text-danger"> {{ $bills->user->created_at }} </span> </small>
                         </h4>
                      </div>
                      <!-- /.col -->
@@ -41,8 +41,8 @@
                   <!-- info row -->
                   <div class="row invoice-info mt-4">
                      <div class="col-sm-4 invoice-col">
-                        <b>Name:- </b> <span class="text-danger"> {{ $bills->name->first_name }} </span><br>
-                        <b>Mobile Number:- </b> <span class="text-danger"> {{ $bills->name->mobile_number }}
+                        <b>Name:- </b> <span class="text-danger"> {{ $bills->user->first_name }} </span><br>
+                        <b>Mobile Number:- </b> <span class="text-danger"> {{ $bills->user->mobile_number }}
                         </span><br>
                      </div>
                      <!-- /.col -->

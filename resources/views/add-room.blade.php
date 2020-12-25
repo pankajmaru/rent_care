@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>                        
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
                     </ol>
                 </div>
             </div>
@@ -38,41 +38,21 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label> Add Room</label>
-                                    <input type="text" class="form-control dropdown-toggle" placeholder="Add Room"
-                                        name="room_number" data-toggle="dropdown">
+                                    <input type="text" class="form-control dropdown-toggle" placeholder="Add Room" name="room_number" data-toggle="dropdown">
                                     @if ($errors->has('room_number'))
                                     <span style="color:red;">{{ $errors->first('room_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label> Rent Amount </label>
-                                    <input type="text" class="form-control dropdown-toggle" placeholder="Room Amount"
-                                        name="rent_amount" data-toggle="dropdown">
+                                    <input type="text" class="form-control dropdown-toggle" placeholder="Rent Amount" name="rent_amount" data-toggle="dropdown">
                                     @if ($errors->has('rent_amount'))
                                     <span style="color:red;">{{ $errors->first('rent_amount') }}</span>
                                     @endif
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label> Electricity Unit</label>
-                                    <input type="text" class="form-control dropdown-toggle"
-                                        placeholder="Electricity Amount" name="electricity_amount" data-toggle="dropdown">
-                                    @if ($errors->has('electricity_amount'))
-                                    <span style="color:red;">{{ $errors->first('electricity_amount') }}</span>
-                                    @endif
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label> Water Amount</label>
-                                    <input type="text" class="form-control dropdown-toggle"
-                                        placeholder="Water Amount" name="water_amount" data-toggle="dropdown">
-                                    @if ($errors->has('water_amount'))
-                                    <span style="color:red;">{{ $errors->first('water_amount') }}</span>
-                                    @endif
-                                </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button class="btn btn-info text-light" type="submit" name="submit" value="Submit">
-                                        Submit
-                                    </button>
+                                    <button class="btn btn-info text-light" type="submit" name="submit" value="Submit">Submit</button>
                                 </div>
                                 {!! Form::close() !!}
                             </div>

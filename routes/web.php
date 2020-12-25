@@ -25,21 +25,33 @@ Auth::routes();
       Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
       Route::any('update/{id}','UsersController@update')->name('tenant-update');
       Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete');   
+      Route::get('/search','UsersController@search')->name('tenant-search');
    });
 
    Route::group(['prefix'=>'room'], function(){
       Route::any('add', 'RoomsController@create')->name('room-add');
-      Route::any('edit/{id}', 'RoomsController@edit')->name('room-edit');
-      Route::any('store', 'RoomsController@store')->name('room-store');
       Route::any('index', 'RoomsController@index')->name('room-index');
-      Route::any('delete/{id}', 'RoomsController@destroy')->name('room-delete');   
+      Route::any('store', 'RoomsController@store')->name('room-store');
+      Route::any('edit/{id}', 'RoomsController@edit')->name('room-edit');
+      Route::any('update/{id}','RoomsController@update')->name('room-update');
+      Route::any('delete/{id}', 'RoomsController@destroy')->name('room-delete');
+      Route::get('/search','RoomsController@search')->name('room-search');
    });
 
    Route::group(['prefix'=>'bill'], function(){
-      Route::any('create','BillsController@create')->name('bill-create');
       Route::any('index','BillsController@index')->name('bill-index');
       Route::any('store','BillsController@store')->name('bill-store');
+      Route::any('create','BillsController@create')->name('bill-create');
       Route::any('show/{id}','BillsController@show')->name('bill-view');
       Route::any('edit/{id}','BillsController@edit')->name('bill-edit');
+      Route::any('update/{id}','BillsController@update')->name('bill-update');
+      Route::any('delete/{id}','BillsController@destroy')->name('bill-delete');
+      Route::get('/search','BillsController@search')->name('bill-search');
    });
+
+   Route::group(['prefix'=>'image'], function(){
+      Route::any('tenant-create-image','ImageController@create')->name('tenant-image-create');
+      Route::any('tenant-store-image','ImageController@upload')->name('tenant-image-store');
+   });
+
 

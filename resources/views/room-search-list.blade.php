@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 id="btn">Rooms List</h1>
+                    <h1 id="btn">Rooms Search List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -46,14 +46,7 @@
                                     class="btn btn-primary float-right font-weight-bold text-light">Add Room</a>
                             </nav>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="alert alert-warning alert-dismissible fade show" style="display:none;" role="alert"
-                            id="success">
-                            your Data Delted Successfully!!
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        <!-- /.card-header -->                        
                         <table id="example2" class="table table-bordered table-hover table-striped">
                             <thead>
                                 <tr>
@@ -68,15 +61,15 @@
                                 @php
                                 $i = 1;
                                 @endphp                       
-                                @foreach ($rooms as $room)
+                                @foreach ($search_results as $search_result)
                                 <tr>
                                     <td>{{ $i++ }}</td>                                    
-                                    <td>{{ $room->room_id }}</td>                                                                   
-                                    <td>{{ $room->room_number }}</td>
-                                    <td>{{ $room->rent_amount }}</td>
+                                    <td>{{ $search_result->room_id }}</td>                                                                   
+                                    <td>{{ $search_result->room_number }}</td>
+                                    <td>{{ $search_result->rent_amount }}</td>
                                     <td>
-                                        <a href="{{ route('room-edit',[$room->room_id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('room-delete',[$room->room_id]) }}" type="button" class="btn btn-primary">Delete</a>
+                                        <a href="{{ route('room-edit',[$search_result->room_id]) }}" type="button" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('room-delete',[$search_result->room_id]) }}" type="button" class="btn btn-primary">Delete</a>
                                     </td>                                    
                                 </tr>                                
                                 @endforeach

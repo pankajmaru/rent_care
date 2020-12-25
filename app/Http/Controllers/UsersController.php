@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\StoreUsers;
 use App\User;
 use App\Room;
@@ -23,7 +25,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->where('type', '=', 'tenants')->get();
+        $users = User::orderBy('id', 'DESC')->where('type', '=', 'tenants')->paginate(5);
         return view('list-tenant',['users'=>$users]);
     }
 
@@ -52,16 +54,12 @@ class UsersController extends Controller
             'first_name' => 'required|min:4',
             'last_name' => 'required|min:3',
             'mobile_number' => 'required|min:10',
-            'room_id' => 'required',
-            'from_date' => 'required',
-            'to_date' => 'required',
+            'room_id' => 'required'
         ]);
             $users->first_name = $request->first_name;
             $users->last_name = $request->last_name;
             $users->mobile_number = $request->mobile_number;
             $users->room_id = $request->room_id;
-            $users->from_date = $request->from_date;
-            $users->to_date = $request->to_date;
             $users->type = 'tenants';
             $users->save();
             return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');
@@ -106,17 +104,13 @@ class UsersController extends Controller
             'last_name' => 'required|min:3',
             'mobile_number' => 'required|min:10',
             'room_id' => 'required',
-            'from_date' => 'required',
-            'to_date' => 'required'
         ]);        
         $users = User::where('id', $id)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'mobile_number' => $request->mobile_number,
-            'room_id' => $request->room_id,
-            'from_date' => $request->from_date,
-            'to_date' => $request->to_date
-            ]);
+            'room_id' => $request->room_id
+             ]);
             return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
         }
 
@@ -130,5 +124,18 @@ class UsersController extends Controller
     {
         $users = User::where('id', $id)->delete();
         return back()->withInput()->with('success', 'Tenant Deleted Successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $search_text = $_GET['search'];
+        $search_results = User::where(function ($query) use($search_text) {$query->where('first_name', 'like', '%' . $search_text . '%')
+            ->orWhere('last_name', 'like', '%' . $search_text . '%')
+            ->orWhere('mobile_number', 'like', '%' . $search_text . '%');})->get();
+        if($search_results->count() == 0)
+            return view('tenant-search-list',['search_results'=>$search_results])
+            ->withErrors(['no_post_result' => 'There is no result you searching for']);
+        else
+            return view('tenant-search-list',['search_results'=>$search_results]);
     }
 }

@@ -16,7 +16,7 @@
                      <div class="col-12">
                         <h4>
                            <i class="fas fa-globe"></i> Rent Care
-                           <small class="float-right">Invoice Date: 2/10/2014</small>
+                           <small class="float-right">Invoice Date: </small>
                         </h4>
                      </div>
                      <!-- /.col -->
@@ -31,7 +31,7 @@
                            <select name="user_id" class="form-control">
                               <option value="">Select Name</option>
                               @foreach ($users as $user)
-                              <option value="{{ $user->id }}">{{ $user->first_name.' '.$user->last_name }}</option>
+                              <option value="{{ $user->id  }}">{{ $user->first_name.' '.$user->last_name }}</option>
                               @endforeach
                            </select>
                            @if ($errors->has('user_id'))
@@ -101,27 +101,6 @@
                               <span style="color:red;">{{ $errors->first('water_unit') }}</span>
                               @endif
                         </div>
-                        {{-- <div class="form-group col-md-6">
-                           <label>Sub Total</label>
-                           <input type="text" class="form-control" placeholder="Sub Total" name="sub_total" value="{{ old('sub_total') }}">
-                           @if ($errors->has('sub_total'))
-                              <span style="color:red;">{{ $errors->first('sub_total') }}</span>
-                           @endif
-                        </div>
-                        <div class="form-group col-md-6">
-                           <label>GST</label>
-                           <input type="text" class="form-control" placeholder="GST" name="gst" value="{{ old('gst') }}">
-                           @if ($errors->has('gst'))
-                              <span style="color:red;">{{ $errors->first('gst') }}</span>
-                           @endif
-                        </div>
-                        <div class="form-group col-md-6">
-                           <label>Net Amount</label>
-                           <input type="text" class="form-control" placeholder="Net Amount" name="net_amount" value="{{ old('net_amount') }}">
-                           @if ($errors->has('net_amount'))
-                              <span style="color:red;">{{ $errors->first('net_amount') }}</span>
-                           @endif
-                        </div> --}}
                      </div>
                      <div class="row no-print">
                         <div class="col-2">                           

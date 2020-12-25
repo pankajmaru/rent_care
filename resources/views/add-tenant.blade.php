@@ -71,25 +71,7 @@
                                     @if ($errors->has('room_id'))
                                     <span style="color:red;">{{ $errors->first('room_id') }}</span>
                                     @endif
-                                </div>                             
-                                
-                                <div class="form-group col-md-6">
-                                    <label>From Date</label>                                                                        
-                                    <input type="date" class="form-control" placeholder="From Date"
-                                        name="from_date">
-                                    @if ($errors->has('from_date'))
-                                    <span style="color:red;">{{ $errors->first('from_date') }}</span>
-                                    @endif
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>To Date</label>                                                                        
-                                    <input type="date" class="form-control" placeholder="To Date"
-                                        name="to_date">
-                                    @if ($errors->has('to_date'))
-                                    <span style="color:red;">{{ $errors->first('to_date') }}</span>
-                                    @endif
-                                </div>
-                                
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

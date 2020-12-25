@@ -2,18 +2,12 @@
 
 @section('content')
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="alert alert-warning alert-dismissible fade show" style="display:none;" role="alert"
-            id="data-success">
-            your Data Deleted Successfully!!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    
+    <section class="content-header">        
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 id="btn"> Bill lists</h1>
+                    <h1 id="btn"> Bill Search lists</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -46,7 +40,8 @@
                                     class="btn btn-primary float-right font-weight-bold text-light">Add New Bill</a>
                             </nav>
                         </div>
-                        <!-- /.card-header -->                        
+                        <!-- /.card-header -->
+                        
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -54,26 +49,24 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Room Number</th>
-                                    <th>Invoice Number</th>                                                                     
-                                                                                                       
+                                    <th>Invoice Number</th>                                                                    
                                     <th>Options</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>                                
                                 @php 
                                 $i = 1;
                                 @endphp
-                                @foreach ($bills as $bill)
+                                @foreach ($search_results as $search_result)
                                 <tr>                                    
-                                    <td>{{ $i++ }}</td>                                    
-                                    <td>{{ $bill->id }}</td>                                    
-                                    <td>{{ $bill->user->first_name }}</td>
-                                    <td>{{ $bill->room->room_number }}</td>                              
-                                    <td>{{ $bill->invoice_number }}</td>
-                                    <td>
-                                        <a href="{{ route('bill-view',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>
-                                        <a href="{{ route('bill-edit',[$bill->id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('bill-delete',[$bill->id]) }}" type="button" class="btn btn-primary">Delete</a>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $search_result->id }}</td>
+                                    <td>{{ $search_result->user->first_name }}</td>
+                                    <td>{{ $search_result->room->room_number }}</td>                              
+                                    <td>{{ $search_result->invoice_number }}</td>
+                                    <td>                                        
+                                        <a href="{{ route('bill-edit',[$search_result->id]) }}" type="button" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('bill-delete',[$search_result->id]) }}" type="button" class="btn btn-primary">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

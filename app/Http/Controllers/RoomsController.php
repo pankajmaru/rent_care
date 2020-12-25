@@ -40,14 +40,10 @@ class RoomsController extends Controller
         $rooms = new Room;
         $validated = $request->validate([
             'room_number' => 'required',
-            'rent_amount' => 'required',
-            'electricity_amount' => 'required',
-            'water_amount' => 'required'
+            'rent_amount' => 'required'
             ]);
             $rooms->room_number = $request->room_number;
             $rooms->rent_amount = $request->rent_amount;
-            $rooms->electricity_amount = $request->electricity_amount;
-            $rooms->water_amount = $request->water_amount;
             $rooms->save();
             return redirect()->route('room-index')->with('success', 'Room Added Successfully');
     }
@@ -69,10 +65,10 @@ class RoomsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
-        $users = User::where('room_id', $id)->get();
-        return view('edit-room',['users'=>$users]);
+        $room = Room::where('room_id', $id)->first();
+        return view('edit-room',['room'=>$room]);
     }
 
     /**
@@ -84,7 +80,15 @@ class RoomsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'room_number' => 'required',
+            'rent_amount' => 'required'            
+        ]);        
+        $rooms = Room::where('room_id', $id)->update([
+            'room_number' => $request->room_number,
+            'rent_amount' => $request->rent_amount,
+           ]);
+            return redirect()->route('room-index')->with('success', 'Room Updated Successfully');
     }
 
     /**
@@ -97,5 +101,12 @@ class RoomsController extends Controller
     {
         $rooms = Room::where('room_id', $id)->delete();
         return back()->withInput()->with('success', 'Room Deleted Successfully');
+    }
+
+    public function search()
+    {
+        $search_text = $_GET['search'];
+        $search_results = Room::where(function ($query) use($search_text) {$query->where('room_number', 'like', '%' . $search_text . '%')->orWhere('rent_amount', 'like', '%' . $search_text . '%');})->get();                
+        return view('room-search-list',['search_results'=>$search_results]);
     }
 }

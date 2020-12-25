@@ -35,9 +35,15 @@
                   <li class="nav-item">
                       <a href="{{ route('tenant-index') }}" class="nav-link">                          
                           <i class="nav-icon fas fa-users"></i>
-                          <p>Tenant</p>
+                          <p>Tenant Lists</p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{ route('tenant-image-create') }}" class="nav-link">
+                        <i class="nav-icon far fa-images"></i>
+                        <p>Image Gallery</p>
+                    </a>
+                </li>
                   <li class="nav-item">
                     <a href="{{ route('tenant-create') }}" class="nav-link">                          
                         <i class="nav-icon fas fa-user-plus"></i>
