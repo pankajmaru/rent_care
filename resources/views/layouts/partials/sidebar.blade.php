@@ -41,7 +41,7 @@
                   <li class="nav-item">
                     <a href="{{ route('tenant-image-create') }}" class="nav-link">
                         <i class="nav-icon far fa-images"></i>
-                        <p>Image Gallery</p>
+                        <p>Add Image</p>
                     </a>
                 </li>
                   <li class="nav-item">

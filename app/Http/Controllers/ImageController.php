@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\StoreUsers;
+use App\User;
+use App\Room;
 use App\Image;
 
 class ImageController extends Controller
@@ -19,7 +21,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        // $images = Image::all();
+        // return view('list-tenant',['images'=>$images]);
     }
 
     /**
@@ -40,9 +43,18 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'fileupload' => 'required'
-        // ]);
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $images = new Image;
+        $images->title = $request->title;
+
+        $images->image = $imageName;
+        $images->save();
+        return back()->with('success','You have successfully upload image.')->with('image',$imageName);
     }
 
     /**
@@ -53,7 +65,29 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        //
+        // $path = storage_public('images/' . $filename);  
+
+        // if (!File::exists($path)) {
+    
+        //     abort(404);
+    
+        // }
+    
+      
+    
+        // $file = File::get($path);
+    
+        // $type = File::mimeType($path);
+    
+      
+    
+        // $response = Response::make($file, 200);
+    
+        // $response->header("Content-Type", $type);
+    
+     
+    
+        // return $response;
     }
 
     /**
@@ -87,13 +121,19 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $data = Image::find($id);
+        // print_r($data) ; die ;
+        // $image_path = public_path('images').'/'.$data->filename;
+        // unlink($image_path);
+        // $data->delete();
+        // if(Storage::delete($data->filename)) {
+        //     $data->delete();
+        //  }
+        // return redirect('/avatars');
     }
 
     public function upload(Request $request)
     {
-        $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-        print_r($input) ; die ;
-        return view('list-tenant');
+        
     }
 }

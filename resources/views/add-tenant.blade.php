@@ -34,7 +34,7 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <span style="color:red;"></span>
-                        {!! Form::open(['method' => 'post', 'route' => 'tenant-store']) !!}
+                        {!! Form::open(['method' => 'post', 'route' => 'tenant-store', 'files' => true]) !!}
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -70,6 +70,13 @@
                                     </select>
                                     @if ($errors->has('room_id'))
                                     <span style="color:red;">{{ $errors->first('room_id') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label >Image Upload</label>
+                                    <input type="file" name="image" class="form-control" placeholder="Image Upload">
+                                    @if ($errors->has('image'))
+                                    <span style="color:red;">{{ $errors->first('image') }}</span>
                                     @endif
                                 </div>
                             </div>

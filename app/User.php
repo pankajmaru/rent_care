@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -14,5 +13,9 @@ class User extends Authenticatable
 
         return $this->belongsTo('App\Room','room_id','room_id');
     }
-}
+    
+    // public function get_image(){
 
+    //     return $this->belongsTo('App\Image','image_id','id');
+    // }
+}

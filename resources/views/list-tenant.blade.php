@@ -48,6 +48,7 @@
                                     <th>Last Name</th>
                                     <th>Mobile Number</th>
                                     <th>Room Number</th>
+                                    <th>Image</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -65,7 +66,10 @@
                                     <td>{{ $user->first_name }}</td>
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->mobile_number }}</td>
-                                    <td>{{ $user->get_room->room_number??'null' }}</td>
+                                    <td>{{ $user->get_room->room_number??'nullroom' }}</td>
+                                    <td>
+                                        <img src="{{asset('images') }}/{{ $user->image??'nullimage'}}" width="70px" height="70px" alt="new image">
+                                    </td>
                                     <td>
                                         <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>
                                         <a href="{{ route('tenant-edit',[$user->id]) }}" type="button" class="btn btn-success">Edit</a>

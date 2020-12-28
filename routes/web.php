@@ -49,9 +49,10 @@ Auth::routes();
       Route::get('/search','BillsController@search')->name('bill-search');
    });
 
-   Route::group(['prefix'=>'image'], function(){
-      Route::any('tenant-create-image','ImageController@create')->name('tenant-image-create');
-      Route::any('tenant-store-image','ImageController@upload')->name('tenant-image-store');
+   Route::group(['prefix'=>'tenant-image'], function(){
+      Route::get('create','ImageController@create')->name('tenant-image-create');
+      Route::post('store','ImageController@store')->name('tenant-image-store');
+      Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
    });
 
 

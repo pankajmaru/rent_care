@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests\StoreUsers;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 use App\User;
 use App\Room;
+use App\Image;
 
 class UsersController extends Controller
 {
@@ -54,15 +57,20 @@ class UsersController extends Controller
             'first_name' => 'required|min:4',
             'last_name' => 'required|min:3',
             'mobile_number' => 'required|min:10',
-            'room_id' => 'required'
+            'room_id' => 'required',
+            'image' => 'required'
         ]);
             $users->first_name = $request->first_name;
             $users->last_name = $request->last_name;
             $users->mobile_number = $request->mobile_number;
             $users->room_id = $request->room_id;
             $users->type = 'tenants';
+
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);            
+            $users->image = $imageName;
             $users->save();
-            return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');
+            return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');            
         }
 
     /**
@@ -86,7 +94,7 @@ class UsersController extends Controller
     public function edit(Request $request, $id)
     {
         $users = User::find($id);        
-        $rooms = Room::all();                
+        $rooms = Room::all();
         return view('edit-tenant', ['users'=>$users,'rooms'=>$rooms]);
     }
 
@@ -104,15 +112,24 @@ class UsersController extends Controller
             'last_name' => 'required|min:3',
             'mobile_number' => 'required|min:10',
             'room_id' => 'required',
-        ]);        
-        $users = User::where('id', $id)->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'mobile_number' => $request->mobile_number,
-            'room_id' => $request->room_id
-             ]);
-            return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
+            'image' => 'required'
+        ]);       
+
+        $users = User::where('id', $id);
+        if($request->hasfile('image')){
+            Storage::delete($users->image);
+            $images = Storage::putFile('public/images/',$request->image);
         }
+        $users->first_name = $request->first_name;
+        $users->last_name = $request->last_name;
+        $users->mobile_number = $request->mobile_number;
+        $users->room_id = $request->room_id;
+        $users->image = $images;
+        $users->save();
+        return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
+    }
+
+        
 
     /**
      * Remove the specified resource from storage.
