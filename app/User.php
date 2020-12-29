@@ -14,8 +14,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Room','room_id','room_id');
     }
     
-    // public function get_image(){
-
-    //     return $this->belongsTo('App\Image','image_id','id');
-    // }
+    public function get_images()
+    {
+        return $this->hasMany('App\UserImage','user_id','id');
+    }    
 }

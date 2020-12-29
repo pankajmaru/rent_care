@@ -39,9 +39,9 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('tenant-image-create') }}" class="nav-link">
+                    <a href="{{ route('tenant-image-index') }}" class="nav-link">
                         <i class="nav-icon far fa-images"></i>
-                        <p>Add Image</p>
+                        <p>Image Gallery</p>
                     </a>
                 </li>
                   <li class="nav-item">

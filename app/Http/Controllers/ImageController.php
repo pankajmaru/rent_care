@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 use App\Http\Requests\StoreUsers;
 use App\User;
 use App\Room;
-use App\Image;
+use App\UserImage;
 
 class ImageController extends Controller
 {
@@ -21,8 +21,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        // $images = Image::all();
-        // return view('list-tenant',['images'=>$images]);
+        $images = UserImage::all();
+        return view('all-tenant-images-list',['images'=>$images]);
     }
 
     /**
@@ -49,9 +49,8 @@ class ImageController extends Controller
             
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-        $images = new Image;
+        $images = new UserImage;
         $images->title = $request->title;
-
         $images->image = $imageName;
         $images->save();
         return back()->with('success','You have successfully upload image.')->with('image',$imageName);
@@ -65,29 +64,7 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        // $path = storage_public('images/' . $filename);  
-
-        // if (!File::exists($path)) {
-    
-        //     abort(404);
-    
-        // }
-    
-      
-    
-        // $file = File::get($path);
-    
-        // $type = File::mimeType($path);
-    
-      
-    
-        // $response = Response::make($file, 200);
-    
-        // $response->header("Content-Type", $type);
-    
-     
-    
-        // return $response;
+        //
     }
 
     /**

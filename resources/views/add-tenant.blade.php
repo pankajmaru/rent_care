@@ -34,7 +34,7 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <span style="color:red;"></span>
-                        {!! Form::open(['method' => 'post', 'route' => 'tenant-store', 'files' => true]) !!}
+                        {!! Form::open(['method' => 'post', 'route' => 'tenant-store', 'files' => 'true', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label >Image Upload</label>
-                                    <input type="file" name="image" class="form-control" placeholder="Image Upload">
+                                    <input type="file" name="image[]" class="form-control" placeholder="Image Upload" multiple>
                                     @if ($errors->has('image'))
                                     <span style="color:red;">{{ $errors->first('image') }}</span>
                                     @endif

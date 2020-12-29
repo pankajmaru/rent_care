@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use App\User;
 use App\Room;
-use App\Image;
+use App\UserImage;
+
 
 class UsersController extends Controller
 {
@@ -52,7 +53,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $users = new User;
+        $users = new User;        
         $validated = $request->validate([
             'first_name' => 'required|min:4',
             'last_name' => 'required|min:3',
@@ -65,11 +66,20 @@ class UsersController extends Controller
             $users->mobile_number = $request->mobile_number;
             $users->room_id = $request->room_id;
             $users->type = 'tenants';
-
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);            
-            $users->image = $imageName;
             $users->save();
+
+            if($request->hasFile('image')){
+                
+                foreach($request->image as $image)
+                {
+                    $userImages = new UserImage;
+                    $userImages->user_id = $users->id;
+                    $imageName = microtime().'.'.$image->extension();
+                    $image->move(public_path('images'), $imageName);
+                    $userImages->image = $imageName;
+                    $userImages->save();
+                }
+            }
             return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');            
         }
 
@@ -81,7 +91,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user= User::find($id);
+        $user = User::find($id);
         return view('view-tenant',['user'=>$user]);
     }
 
@@ -116,10 +126,6 @@ class UsersController extends Controller
         ]);       
 
         $users = User::where('id', $id);
-        if($request->hasfile('image')){
-            Storage::delete($users->image);
-            $images = Storage::putFile('public/images/',$request->image);
-        }
         $users->first_name = $request->first_name;
         $users->last_name = $request->last_name;
         $users->mobile_number = $request->mobile_number;
@@ -127,9 +133,7 @@ class UsersController extends Controller
         $users->image = $images;
         $users->save();
         return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
-    }
-
-        
+    }        
 
     /**
      * Remove the specified resource from storage.

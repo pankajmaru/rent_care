@@ -52,6 +52,9 @@ Auth::routes();
    Route::group(['prefix'=>'tenant-image'], function(){
       Route::get('create','ImageController@create')->name('tenant-image-create');
       Route::post('store','ImageController@store')->name('tenant-image-store');
+      Route::get('show','ImageController@show')->name('tenant-image-show');
+      Route::get('index','ImageController@index')->name('tenant-image-index');
+      Route::post('edit/{id}','ImageController@edit')->name('tenant-image-edit');
       Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
    });
 

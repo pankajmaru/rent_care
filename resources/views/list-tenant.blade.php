@@ -68,7 +68,11 @@
                                     <td>{{ $user->mobile_number }}</td>
                                     <td>{{ $user->get_room->room_number??'nullroom' }}</td>
                                     <td>
-                                        <img src="{{asset('images') }}/{{ $user->image??'nullimage'}}" width="70px" height="70px" alt="new image">
+                                        @if(!empty($user->get_images))
+                                        @foreach ($user->get_images as $images)
+                                        <img src="{{ asset('/images').'/'.$images->image }}" height="20px" width="20px">
+                                        @endforeach
+                                    @endif
                                     </td>
                                     <td>
                                         <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>
@@ -78,7 +82,6 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
                         <!-- /.card-body -->
                     </div>
