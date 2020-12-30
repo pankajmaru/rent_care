@@ -57,17 +57,16 @@
                                 $number = 1;
                                 $numElementsPerPage = 5; // How many elements per page
                                 $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                                $currentNumber = ($pageNumber - 1) * $numElementsPerPage + $number;
-                                echo "<td>  ". $currentNumber++ ." </td>";
+                                $currentNumber = ($pageNumber - 1) * $numElementsPerPage + $number;                                
                                 @endphp
                                 @foreach ($search_results as $search_result)
                                 <tr>
-                                    <td>{{ $number++;}}</td>
+                                    <td>{{ $number++ }}</td>
                                     <td>{{ $search_result->id }}</td>
-                                    <td>{{ $search_result->first_name }}</td>
-                                    <td>{{ $search_result->last_name }}</td>
-                                    <td>{{ $search_result->mobile_number }}</td>
-                                    <td>{{ $search_result->get_room->room_number }}</td>
+                                    <td>{{ $search_result->first_name??'null' }}</td>
+                                    <td>{{ $search_result->last_name??'null' }}</td>
+                                    <td>{{ $search_result->mobile_number??'null' }}</td>
+                                    <td>{{ $search_result->get_room->room_number??'null' }}</td>
                                     <td>
                                         <a href="{{ route('tenant-show',[$search_result->id]) }}" type="button" class="btn btn-danger">View</a>
                                         <a href="{{ route('tenant-edit',[$search_result->id]) }}" type="button" class="btn btn-success">Edit</a>

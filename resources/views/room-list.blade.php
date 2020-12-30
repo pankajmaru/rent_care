@@ -58,9 +58,10 @@
                             <thead>
                                 <tr>
                                     <th>Sr. No.</th>
-                                    <th>Id</th>                                    
+                                    <th>Id</th>                           
                                     <th>Room Number</th>
-                                    <th>Rent Amount</th>                                    
+                                    <th>Rent Amount</th>
+                                    <th>Room Images</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -71,9 +72,10 @@
                                 @foreach ($rooms as $room)
                                 <tr>
                                     <td>{{ $i++ }}</td>                                    
-                                    <td>{{ $room->room_id }}</td>                                                                   
-                                    <td>{{ $room->room_number }}</td>
-                                    <td>{{ $room->rent_amount }}</td>
+                                    <td>{{ $room->room_id??'null' }}</td>                                                                   
+                                    <td>{{ $room->room_number??'null' }}</td>
+                                    <td>{{ $room->rent_amount??'null' }}</td>
+                                    <td></td>
                                     <td>
                                         <a href="{{ route('room-edit',[$room->room_id]) }}" type="button" class="btn btn-success">Edit</a>
                                         <a href="{{ route('room-delete',[$room->room_id]) }}" type="button" class="btn btn-primary">Delete</a>

@@ -49,7 +49,7 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Room Number</th>
-                                    <th>Invoice Number</th>                                                                    
+                                    <th>Invoice Number</th>                                                             
                                     <th>Options</th>
                                 </tr>
                             </thead>

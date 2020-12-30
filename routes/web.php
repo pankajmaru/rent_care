@@ -24,7 +24,7 @@ Auth::routes();
       Route::get('show/{id}', 'UsersController@show')->name('tenant-show');
       Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
       Route::any('update/{id}','UsersController@update')->name('tenant-update');
-      Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete');   
+      Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete'); 
       Route::get('/search','UsersController@search')->name('tenant-search');
    });
 

@@ -31,22 +31,24 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session('success'))
-                        <div class="alert alert-success alert-dismissible">                            
+                        <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong>{{ session('success') }}</strong>
-                          </div>
-                          @endif
+                        </div>
+                        @endif
                         <div class="card-header">
                             <nav class="navbar navbar-light">
-                                {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class' => 'form-inline']) !!}
-                                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search Tenants" aria-label="Search">
+                                {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class'
+                                => 'form-inline']) !!}
+                                <input class="form-control mr-sm-2" name="search" type="text"
+                                    placeholder="Search Tenants" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
                                 {!! Form::close() !!}
                                 <a href="{{ route('bill-create') }}" type="button"
                                     class="btn btn-primary float-right font-weight-bold text-light">Add New Bill</a>
                             </nav>
                         </div>
-                        <!-- /.card-header -->                        
+                        <!-- /.card-header -->
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -54,21 +56,20 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Room Number</th>
-                                    <th>Invoice Number</th>                                                                     
-                                                                                                       
+                                    <th>Invoice Number</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php 
+                                @php
                                 $i = 1;
                                 @endphp
                                 @foreach ($bills as $bill)
-                                <tr>                                    
-                                    <td>{{ $i++ }}</td>                                    
-                                    <td>{{ $bill->id }}</td>                                    
-                                    <td>{{ $bill->user->first_name }}</td>
-                                    <td>{{ $bill->room->room_number }}</td>                              
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $bill->id }}</td>
+                                    <td>{{ $bill->user->first_name??'null' }}</td>
+                                    <td>{{ $bill->room->room_number }}</td>
                                     <td>{{ $bill->invoice_number }}</td>
                                     <td>
                                         <a href="{{ route('bill-view',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>

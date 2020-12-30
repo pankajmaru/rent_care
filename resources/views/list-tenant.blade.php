@@ -72,7 +72,7 @@
                                         @foreach ($user->get_images as $images)
                                         <img src="{{ asset('/images').'/'.$images->image }}" height="20px" width="20px">
                                         @endforeach
-                                    @endif
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>

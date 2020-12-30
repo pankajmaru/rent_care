@@ -14,7 +14,6 @@ use App\User;
 use App\Room;
 use App\UserImage;
 
-
 class UsersController extends Controller
 {
     public function home()
@@ -150,10 +149,11 @@ class UsersController extends Controller
     public function search(Request $request)
     {
         $search_text = $_GET['search'];
-        $search_results = User::where(function ($query) use($search_text) {$query->where('first_name', 'like', '%' . $search_text . '%')
-            ->orWhere('last_name', 'like', '%' . $search_text . '%')
-            ->orWhere('mobile_number', 'like', '%' . $search_text . '%');})->get();
-        if($search_results->count() == 0)
+        $searchString = trim($search_text);
+        $search_results = User::where(function ($query) use($searchString) {$query->where('first_name', 'like', '%' . $searchString . '%')
+            ->orWhere('last_name', 'like', '%' . $searchString . '%')
+            ->orWhere('mobile_number', 'like', '%' . $searchString . '%');})->get();
+            if($search_results->count() == 0)
             return view('tenant-search-list',['search_results'=>$search_results])
             ->withErrors(['no_post_result' => 'There is no result you searching for']);
         else
