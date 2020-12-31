@@ -3,6 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use App\Http\Requests\StoreUsers;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use App\User;
+use App\Room;
+use App\UserImage;
 
 class HomeController extends Controller
 {
@@ -23,7 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+       // Auth::logout();
         return view('home');
     }   
-
 }

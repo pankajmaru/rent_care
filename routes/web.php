@@ -12,9 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+   Auth::routes();
 
    Route::get('/', 'HomeController@index')->name('home');
+   
+   Route::group(['middleware' => ['auth', 'AdmiMiddleware']], function() {
+
+
    
    Route::group(['prefix'=>'tenant'], function(){
       Route::get('/', 'UsersController@home')->name('dashboard');
@@ -57,5 +61,12 @@ Auth::routes();
       Route::post('edit/{id}','ImageController@edit')->name('tenant-image-edit');
       Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
    });
+
+});
+
+Route::get('/logout', function() {
+   Auth::logout();
+})->name('logout');
+
 
 
