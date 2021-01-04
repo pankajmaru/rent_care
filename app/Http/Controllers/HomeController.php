@@ -33,7 +33,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-       // Auth::logout();
         return view('home');
     }   
 }

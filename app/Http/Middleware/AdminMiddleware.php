@@ -26,19 +26,12 @@ class AdminMiddleware
      * @return mixed
      */
 
-    public function handle($request, Closure $next)
-    {
-        if(!Auth::guest() && Auth::user()->type == 'admin' ){
-                 
-            return $next($request);
-        }else{
-            return redirect()->route('login');
+    public function handle($request, Closure $next){
+
+        if(empty($request)) {
             
+            return $next($request);
         }
-       // echo 'b' ; die ;
-
-        //
+        return redirect('home');
     }
-
-    
 }

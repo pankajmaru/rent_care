@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
    Auth::routes();
-
-   Route::get('/', 'HomeController@index')->name('home');
    
-   Route::group(['middleware' => ['auth', 'AdmiMiddleware']], function() {
+   Route::get('/', 'HomeController@index')->name('home');   
 
-
-   
    Route::group(['prefix'=>'tenant'], function(){
-      Route::get('/', 'UsersController@home')->name('dashboard');
+      Route::get('home', 'UsersController@home')->name('dashboard');
       Route::get('index', 'UsersController@index')->name('tenant-index');
       Route::post('store', 'UsersController@store')->name('tenant-store');
       Route::get('create', 'UsersController@create')->name('tenant-create');
@@ -29,7 +25,7 @@ use Illuminate\Support\Facades\Route;
       Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
       Route::any('update/{id}','UsersController@update')->name('tenant-update');
       Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete'); 
-      Route::get('/search','UsersController@search')->name('tenant-search');
+      Route::get('search','UsersController@search')->name('tenant-search');
    });
 
    Route::group(['prefix'=>'room'], function(){
@@ -61,12 +57,4 @@ use Illuminate\Support\Facades\Route;
       Route::post('edit/{id}','ImageController@edit')->name('tenant-image-edit');
       Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
    });
-
-});
-
-Route::get('/logout', function() {
-   Auth::logout();
-})->name('logout');
-
-
 
