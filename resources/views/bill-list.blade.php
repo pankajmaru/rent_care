@@ -37,16 +37,21 @@
                         </div>
                         @endif
                         <div class="card-header">
-                            <nav class="navbar navbar-light">
-                                {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class'
-                                => 'form-inline']) !!}
-                                <input class="form-control mr-sm-2" name="search" type="text"
-                                    placeholder="Search Tenants" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
-                                {!! Form::close() !!}
-                                <a href="{{ route('bill-create') }}" type="button"
-                                    class="btn btn-primary float-right font-weight-bold text-light">Add New Bill</a>
-                            </nav>
+                            <div class="row">
+                                <nav class="navbar navbar-light">
+                                    {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class' => 'form-inline']) !!}                                    
+                                        {{-- {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}  --}}
+                                        {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search By Name','aria-label' => 'Search','class' => 'form-control']) !!}
+                                        <br>
+                                        {!! Form::selectMonth('month',$value = old('search'),['placeholder' => 'Search By Month','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
+                                        <br>
+                                        {!! Form::selectYear('year', 2018, 2021, $value = old('search'), ['placeholder' => 'Search By Year','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
+                                        <br>
+                                        <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search </button>
+                                    {!! Form::close() !!}
+                                </nav>
+                            </div>
+                            <a href="{{ route('bill-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add New Bill</a>
                         </div>
                         <!-- /.card-header -->
                         <table id="example2" class="table table-bordered table-hover">

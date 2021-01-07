@@ -54,7 +54,8 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $users = new User;        
+    {   
+        $users = new User;        
         $validated = $request->validate([
             'first_name' => 'required|min:4',
             'last_name' => 'required|min:3',
@@ -70,17 +71,16 @@ class UsersController extends Controller
             $users->save();
 
             if($request->hasFile('image')){
-                foreach($request->image as $img)
-                {
-                    $userImages = new UserImage;
-                    $userImages->user_id = $users->id;
-                    $imageName = microtime().'.'.$img->extension();
-                    $img->move(public_path('images'), $imageName);
-                    $userImages->img = $imageName;
-                    $userImages->save();
-                }
+
+                $img = $request->file('image');
+                $userImages = new UserImage;
+                $userImages->user_id = $users->id;
+                $imageName = microtime().'.'.$img->extension();
+                $img->move(public_path('images'), $imageName);
+                $userImages->image = $imageName;
+                $userImages->save();
             }
-            return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');            
+            return redirect()->route('tenant-index')->with('success', 'Tenant Add Successfully');
         }
 
     /**

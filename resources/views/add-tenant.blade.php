@@ -26,7 +26,7 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <span style="color:red;"></span>
-                        {!! Form::open(['method' => 'post', 'route' => 'tenant-store', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal','files' => 'true',]) !!}
+                        {!! Form::open(['files' => 'true','method' => 'post', 'route' => 'tenant-store', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -62,14 +62,13 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    {!! Form::label('image', 'Upload Image', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::label('image', 'Image Upload', ['class' => 'col-md-6 control-label']) !!}
                                     <br>
-                                    {!! Form::file('image',['class' => 'col-md-6 control-label']); !!}
-                                    <br>
-                                    @if ($errors->has('image'))
-                                    <span style="color:red;">{{ $errors->first('image') }}</span>
-                                    @endif
-                                </div>                               
+                                    {!! Form::file('image',['class' => 'form-control']); !!}
+                                    {{-- @if ($errors->has('room_number'))
+                                    <span style="color:red;">{{ $errors->first('room_number') }}</span>
+                                    @endif --}}
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

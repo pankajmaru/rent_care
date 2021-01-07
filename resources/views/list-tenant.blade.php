@@ -29,14 +29,14 @@
                             <strong>{{ session('success') }}</strong>
                         </div>
                         @endif
-                        <div class="card-header">
-                            <nav class="navbar navbar-light">
-                                {!! Form::open(['method' => 'get', 'route' => 'tenant-search', 'role' => 'form', 'class' => 'form-inline']) !!}
-                                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search Tenants" aria-label="Search" value="{{ request('search') }}">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
-                                {!! Form::close() !!}
-                                <a href="{{ route('tenant-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a>
-                            </nav>
+                        <div class="card-header">                            
+                                <nav class="navbar navbar-light">
+                                    {!! Form::open(['method' => 'get', 'route' => 'tenant-search', 'role' => 'form', 'class' => 'form-inline']) !!}                              
+                                        {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search Tenants','aria-label' => 'Search','class' => 'form-control']) !!}
+                                        <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search </button>                                                                                            
+                                    {!! Form::close() !!}
+                                </nav>                            
+                            <a href="{{ route('tenant-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a>
                         </div>
                         <!-- /.card-header -->
                         <table id="example2" class="table table-bordered table-hover table-striped">

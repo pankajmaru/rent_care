@@ -19,7 +19,6 @@ class BillsController extends Controller
     public function index()
     {
         $bills = Bill::all();
-       
         return view('bill-list',['bills'=>$bills]);
     }
 
@@ -30,8 +29,8 @@ class BillsController extends Controller
      */
     public function create()
     {
-        $users = User::get();
-        $rooms = Room::get();
+        $users = User::pluck('first_name','id');        
+        $rooms = Room::pluck('room_number', 'room_id');
         return view('new-bill',['users'=>$users,'rooms'=>$rooms]);
     }
 
@@ -43,17 +42,17 @@ class BillsController extends Controller
      */
     public function store(Request $request)
     {           
-        $validated = $request->validate([
-            'user_id' => 'required',
-            'room_number' => 'required',
-            'invoice_number' => 'required|min:3',
-            'mobile_number' => 'required|max:10',
-            'from_date' => 'required',
-            'to_date' => 'required',
-            'rent_amount' => 'required',
-            'electricity_unit' => 'required',
-            'water_unit' => 'required',
-            ]);
+        // $validated = $request->validate([
+        //     'user_id' => 'required',
+        //     'room_number' => 'required',
+        //     'invoice_number' => 'required|min:3',
+        //     'mobile_number' => 'required|max:10',
+        //     'from_date' => 'required',
+        //     'to_date' => 'required',
+        //     'rent_amount' => 'required',
+        //     'electricity_unit' => 'required',
+        //     'water_unit' => 'required',
+        //     ]);
         $bills = new Bill;        
         $bills->user_id = $request->user_id;
         $bills->room_id = $request->room_number;
@@ -137,11 +136,11 @@ class BillsController extends Controller
         return back()->withInput()->with('success', 'Bills Deleted Successfully');
     }    
 
-    public function search()
+    public function search(Request $request)
     {
-        $search_text = $_GET['search'];
-        $search_results = Bill::where(function ($query) use($search_text){$query->where('invoice_number', 'like', '%' . $search_text . '%');})->get();
-                        
+        $search_text = $request;
+        $searchString = trim($search_text);
+        $search_results = Bill::where(function ($query) use($search_text) {$query->where('invoice_number', 'like', '%' . $search_text . '%');})->get();
         return view('bill-search-list',['search_results'=>$search_results]);
-    }
+    }    
 }

@@ -20,7 +20,6 @@ Auth::routes();
       Route::get('/', 'UsersController@home')->name('dashboard');
 
    Route::group(['prefix'=>'tenant'], function(){
-            
       Route::get('index', 'UsersController@index')->name('tenant-index');
       Route::post('store', 'UsersController@store')->name('tenant-store');
       Route::get('create', 'UsersController@create')->name('tenant-create');

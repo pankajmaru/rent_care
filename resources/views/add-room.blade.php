@@ -37,15 +37,19 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label> Add Room</label>
-                                    <input type="text" class="form-control dropdown-toggle" placeholder="Add Room" name="room_number" data-toggle="dropdown">
+                                    {{-- <label> Add Room</label>
+                                    <input type="text" class="form-control dropdown-toggle" placeholder="Add Room" name="room_number" data-toggle="dropdown"> --}}
+                                    {!! Form::label('add room', 'Add Room', ['class' => 'col-md-6 control-label']) !!}
+                                    <br>
+                                    {!! Form::text('room_number', $value = old('room_number'), ['class' => 'form-control', 'placeholder' => 'Add Room']) !!}
                                     @if ($errors->has('room_number'))
                                     <span style="color:red;">{{ $errors->first('room_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label> Rent Amount </label>
-                                    <input type="text" class="form-control dropdown-toggle" placeholder="Rent Amount" name="rent_amount" data-toggle="dropdown">
+                                    {!! Form::label('rent_amount', 'Rent Amount', ['class' => 'col-md-6 control-label']) !!}
+                                    <br>
+                                    {!! Form::text('rent_amount', $value = old('rent_amount'), ['class' => 'form-control', 'placeholder' => 'Rent Amount']) !!}
                                     @if ($errors->has('rent_amount'))
                                     <span style="color:red;">{{ $errors->first('rent_amount') }}</span>
                                     @endif
