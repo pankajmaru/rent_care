@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-
-   Route::group(['middleware' => ['auth','isadmin']], function () {
-
+   Route::group(['middleware' => ['auth','isadmin']], function() {
+      
       Route::get('/', 'UsersController@home')->name('dashboard');
+      
+      Route::group(['prefix'=>'admin'], function(){
+
+         Route::get('profile-index', 'AdminController@index')->name('admin-profile-index');
+         Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
+         Route::post('update/{id}', 'AdminController@update')->name('admin-update');
+   });
 
    Route::group(['prefix'=>'tenant'], function(){
       Route::get('index', 'UsersController@index')->name('tenant-index');
@@ -26,8 +32,7 @@ Auth::routes();
       Route::get('show/{id}', 'UsersController@show')->name('tenant-show');
       Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
       Route::any('update/{id}','UsersController@update')->name('tenant-update');
-      Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete'); 
-      Route::get('/search','UsersController@search')->name('tenant-search');
+      Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete');
    });
 
    Route::group(['prefix'=>'room'], function(){
@@ -37,7 +42,6 @@ Auth::routes();
       Route::any('edit/{id}', 'RoomsController@edit')->name('room-edit');
       Route::any('update/{id}','RoomsController@update')->name('room-update');
       Route::any('delete/{id}', 'RoomsController@destroy')->name('room-delete');
-      Route::get('/search','RoomsController@search')->name('room-search');
    });
 
    Route::group(['prefix'=>'bill'], function(){
@@ -48,7 +52,6 @@ Auth::routes();
       Route::any('edit/{id}','BillsController@edit')->name('bill-edit');
       Route::any('update/{id}','BillsController@update')->name('bill-update');
       Route::any('delete/{id}','BillsController@destroy')->name('bill-delete');
-      Route::get('/search','BillsController@search')->name('bill-search');
    });
 
    Route::group(['prefix'=>'tenant-image'], function(){

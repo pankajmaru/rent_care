@@ -11,7 +11,6 @@
             <a href="#" class="nav-link">Contact</a>
         </li>
     </ul>
-
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
@@ -23,7 +22,6 @@
             </div>
         </div>
     </form>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
@@ -111,7 +109,7 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-        <li class="nav-item">            
+        <li class="nav-item">
         </li>
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
@@ -132,11 +130,12 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item" href="{{ route('admin-profile-index') }}">
+                        {{ __('My Profile') }}
+                    </a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

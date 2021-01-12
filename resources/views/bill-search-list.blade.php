@@ -33,7 +33,7 @@
                           <div class="card-header">
                             <div class="row">
                                 <nav class="navbar navbar-light">
-                                    {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class' => 'form-inline']) !!}                                    
+                                    {!! Form::open(['method' => 'get', 'route' => 'bill-index', 'role' => 'form', 'class' => 'form-inline']) !!}                                    
                                         {{-- {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}  --}}
                                         {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search By Name','aria-label' => 'Search','class' => 'form-control']) !!}
                                         <br>
@@ -70,7 +70,7 @@
                                     <td>{{ $search_result->user->first_name }}</td>
                                     <td>{{ $search_result->room->room_number }}</td>                              
                                     <td>{{ $search_result->invoice_number }}</td>
-                                    <td>                             
+                                    <td>
                                         <a href="{{ route('bill-view',[$search_result->id]) }}" type="button" class="btn btn-danger">View</a>           
                                         <a href="{{ route('bill-edit',[$search_result->id]) }}" type="button" class="btn btn-success">Edit</a>
                                         <a href="{{ route('bill-delete',[$search_result->id]) }}" type="button" class="btn btn-primary">Delete</a>

@@ -29,14 +29,18 @@
                             <strong>{{ session('success') }}</strong>
                         </div>
                         @endif
-                        <div class="card-header">                            
-                                <nav class="navbar navbar-light">
-                                    {!! Form::open(['method' => 'get', 'route' => 'tenant-search', 'role' => 'form', 'class' => 'form-inline']) !!}                              
-                                        {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search Tenants','aria-label' => 'Search','class' => 'form-control']) !!}
-                                        <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search </button>                                                                                            
-                                    {!! Form::close() !!}
-                                </nav>                            
-                            <a href="{{ route('tenant-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a>
+                        <div class="card-header">
+                            <nav class="navbar navbar-light">
+                                {!! Form::open(['method' => 'get', 'route' => 'tenant-index', 'role' => 'form', 'class'
+                                => 'form-inline']) !!}
+                                {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search
+                                Tenants','aria-label' => 'Search','class' => 'form-control']) !!}
+                                <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search
+                                </button>
+                                {!! Form::close() !!}
+                            </nav>
+                            <a href="{{ route('tenant-create') }}" type="button"
+                                class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a>
                         </div>
                         <!-- /.card-header -->
                         <table id="example2" class="table table-bordered table-hover table-striped">
@@ -75,9 +79,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>
-                                        <a href="{{ route('tenant-edit',[$user->id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('tenant-delete', [$user->id]) }}" type="button" class="btn btn-primary">Delete</a>
+                                        <a href="{{ route('tenant-show',[$user->id]) }}" type="button"
+                                            class="btn btn-danger">View</a>
+                                        <a href="{{ route('tenant-edit',[$user->id]) }}" type="button"
+                                            class="btn btn-success">Edit</a>
+                                        <a href="{{ route('tenant-delete', [$user->id]) }}" type="button"
+                                            class="btn btn-primary">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

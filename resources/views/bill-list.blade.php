@@ -39,13 +39,12 @@
                         <div class="card-header">
                             <div class="row">
                                 <nav class="navbar navbar-light">
-                                    {!! Form::open(['method' => 'get', 'route' => 'bill-search', 'role' => 'form', 'class' => 'form-inline']) !!}                                    
-                                        {{-- {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}  --}}
-                                        {!! Form::text('search',$value = old('search'), ['placeholder' => 'Search By Name','aria-label' => 'Search','class' => 'form-control']) !!}
+                                    {!! Form::open(['method' => 'get','route' => 'bill-index','class' => 'form-inline']) !!}
+                                        {!! Form::text('search', $value = request('search'), ['placeholder' => 'Search By Name','aria-label' => 'Search','class' => 'form-control']) !!}
                                         <br>
-                                        {!! Form::selectMonth('month',$value = old('search'),['placeholder' => 'Search By Month','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
+                                        {!! Form::selectMonth('month',$value = request('month'), ['placeholder' => 'Search By Month','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
                                         <br>
-                                        {!! Form::selectYear('year', 2018, 2021, $value = old('search'), ['placeholder' => 'Search By Year','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
+                                        {!! Form::selectYear('year', 2018, 2021, $value = request('year'), ['placeholder' => 'Search By Year','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
                                         <br>
                                         <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search </button>
                                     {!! Form::close() !!}

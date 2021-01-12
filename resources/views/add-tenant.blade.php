@@ -65,9 +65,9 @@
                                     {!! Form::label('image', 'Image Upload', ['class' => 'col-md-6 control-label']) !!}
                                     <br>
                                     {!! Form::file('image',['class' => 'form-control']); !!}
-                                    {{-- @if ($errors->has('room_number'))
+                                    @if ($errors->has('room_number'))
                                     <span style="color:red;">{{ $errors->first('room_number') }}</span>
-                                    @endif --}}
+                                    @endif
                                 </div>
                             </div>
                             <!-- /.card-body -->

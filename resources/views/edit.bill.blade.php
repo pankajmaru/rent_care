@@ -21,81 +21,70 @@
                             <!-- /.col -->
                         </div>
                         <!-- info row -->
-                        {!! Form::model($bills, array('route' => array('bill-update',$bills->id))) !!}
+                        {!! Form::model($bills, array('route' => array('bill-update',$bills->id))) !!}                        
                         @csrf
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row">                                
                                 <div class="form-group col-md-6">
-                                    <label>Name</label>
-                                    <select name="user_id" class="form-control">
-                                      <option value="">Select Name</option>
-                                      @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->first_name }}</option>
-                                      @endforeach
-                                    </select>
+                                    {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::select('user_id', $users, $value = ['users' => 'id'] , ['class' => 'form-control', 'placeholder' => 'Select Name']) !!}
                                     @if ($errors->has('user_id'))
                                     <span style="color:red;">{{ $errors->first('user_id') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Room</label>
-                                    <select name="room_id" class="form-control">
-                                        <option value="">Select Name</option>
-                                        @foreach ($rooms as $room)
-                                        <option value="{{ $room->room_id }}">{{ $room->room_number }}</option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::label('room number', 'Room Number', ['class' => 'col-md-6 control-label'])
+                                    !!}
+                                    {!! Form::select('room_number', $rooms, null , ['class' => 'form-control','placeholder' => 'Select Room']) !!}
                                     @if ($errors->has('room_number'))
                                     <span style="color:red;">{{ $errors->first('room_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Invoice Number</label>
-                                    <input type="text" class="form-control" placeholder="Invoice Number"
-                                        name="invoice_number" value="{{ $bills->invoice_number }}">
+                                    {!! Form::label('invoice Number', 'Invoice Number', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::text('invoice_number', $value = old('invoice_number'), ['class' => 'form-control', 'placeholder' => 'Invoice Number']) !!}
                                     @if ($errors->has('invoice_number'))
                                     <span style="color:red;">{{ $errors->first('invoice_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Mobile Number</label>                                    
-                                    <input type="text" class="form-control" placeholder="Mobile Number"
-                                        name="mobile_number" value="{{ $user->mobile_number }}">                                    
+                                    {!! Form::label('mobile Number', 'Mobile Number', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::text('mobile_number', $value = old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number']) !!}
                                     @if ($errors->has('mobile_number'))
                                     <span style="color:red;">{{ $errors->first('mobile_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>From Date</label>
-                                    <input type="date" class="form-control" placeholder="From Date" name="from_date" value="{{ $bills->from_date }}">
+                                    {!! Form::label('from date', 'From Date', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::date('from_date', \Carbon\Carbon::now(), ['class' => 'form-control', 'placeholder' => 'From Date']); !!}
                                     @if ($errors->has('from_date'))
                                     <span style="color:red;">{{ $errors->first('from_date') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>To Date</label>
-                                    <input type="date" class="form-control" placeholder="To Date" name="to_date" value="{{ $bills->to_date }}">
+                                 {!! Form::label('to date', 'To Date', ['class' => 'col-md-6 control-label']) !!}
+                                 {!! Form::date('to_date', \Carbon\Carbon::now(), ['class' => 'form-control','placeholder' => 'To Date']); !!}                                    
                                     @if ($errors->has('to_date'))
                                     <span style="color:red;">{{ $errors->first('to_date') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Rent Amount</label>
-                                    <input type="text" class="form-control" placeholder="Rent Amount" name="rent_amount" value="{{ $bills->room->rent_amount }}">
+                                 {!! Form::label('rent amount', 'Rent Amount', ['class' => 'col-md-6 control-label']) !!}
+                                 {!! Form::text('rent_amount', $value = old('rent_amount'), ['class' => 'form-control', 'placeholder' => 'Rent Amount']) !!}                                    
                                     @if ($errors->has('rent_amount'))
                                     <span style="color:red;">{{ $errors->first('rent_amount') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Electricity Unit</label>
-                                    <input type="text" class="form-control" placeholder="Electricity Unit" name="electricity_unit" value="{{ $bills->electricity_unit }}">
+                                 {!! Form::label('electricity unit', 'Electricity Unit', ['class' => 'col-md-6 control-label']) !!}
+                                 {!! Form::text('electricity_unit', $value = old('electricity_unit'), ['class' => 'form-control', 'placeholder' => 'Electricity Unit']) !!}
                                     @if ($errors->has('electricity_unit'))
                                     <span style="color:red;">{{ $errors->first('electricity_unit') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Water Unit</label>
-                                    <input type="text" class="form-control" placeholder="Water Unit" name="water_unit" value="{{ $bills->water_unit }}">
+                                 {!! Form::label('water unit', 'Water Unit', ['class' => 'col-md-6 control-label']) !!}
+                                 {!! Form::text('water_unit', $value = old('water_unit'), ['class' => 'form-control', 'placeholder' => 'Water Unit']) !!}
                                     @if ($errors->has('water_unit'))
                                     <span style="color:red;">{{ $errors->first('water_unit') }}</span>
                                     @endif
@@ -103,8 +92,7 @@
                             </div>
                             <div class="row no-print">
                                 <div class="col-2">
-                                    <button class="btn btn-primary" type="submit" name="submit" value="Submit"> Submit
-                                    </button>
+                                    <button class="btn btn-primary" type="submit" name="submit" value="Submit"> Submit </button>
                                 </div>
                             </div>
                         </div>

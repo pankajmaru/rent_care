@@ -38,7 +38,7 @@
                         @endif
                         <div class="card-header">
                             <nav class="navbar navbar-light">
-                                {!! Form::open(['method' => 'get', 'route' => 'room-search', 'role' => 'form', 'class' => 'form-inline']) !!}
+                                {!! Form::open(['method' => 'get', 'route' => 'room-index', 'role' => 'form', 'class' => 'form-inline']) !!}
                                 <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search Tenants" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
                                 {!! Form::close() !!}
@@ -46,8 +46,7 @@
                             </nav>
                         </div>
                         <!-- /.card-header -->
-                        <div class="alert alert-warning alert-dismissible fade show" style="display:none;" role="alert"
-                            id="success">
+                        <div class="alert alert-warning alert-dismissible fade show" style="display:none;" role="alert" id="success">
                             your Data Delted Successfully!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>

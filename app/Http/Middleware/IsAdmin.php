@@ -15,12 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
+        if (Auth::user()) {
             
-        if (Auth::user() &&  Auth::user()->type == 'admin') {
-        
             return $next($request);
         }
-        
         Auth::logout();
         return redirect('login')->with('message','You have not admin access');
     }
