@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Profile</h1>
+                    <h1 class="text-center">Edit Profile</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,29 +25,23 @@
             <div class="row">
                 <div class="col-md-5 justify-content-center offset-3">
                     <!-- Profile Image -->
-                    <div class="card card-primary card-outline text-center">       
-                        {!! Form::model($profile, array('route' => array('admin-update',$profile->id))) !!}
+                    <div class="card card-primary card-outline text-center">
+                        {!! Form::open(['file' => 'true', 'method' => 'post', 'route' => ['admin-update',$profile->id] , 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-8 offset-2">
-
                                     {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}
                                     <br>
-                                    {!! Form::text('name', '' ,['class' => 'form-control', 'placeholder' => 'Name']) !!}
-
+                                    {!! Form::text('name', '' , ['class' => 'form-control', 'placeholder' => 'Name']) !!}
                                     @if ($errors->has('name'))
                                     <span style="color:red;">{{ $errors->first('name') }}</span>
                                     @endif
-
                                 </div>
-                                <div class="form-group col-md-8  offset-2">
-
+                                <div class="form-group col-md-8 offset-2">
                                 {!! Form::label('image', 'Image Upload', ['class' => 'col-md-6 control-label']) !!}
                                 <br>
-
-                                {!! Form::file('image',['class' => 'form-control']); !!}
-                                
+                                {!! Form::file('image', ['class' => 'form-control']); !!}
                                 @if ($errors->has('image'))
                                 <span style="color:red;">{{ $errors->first('image') }}</span>
                                 @endif

@@ -61,6 +61,7 @@
                                     <th>Name</th>
                                     <th>Room Number</th>
                                     <th>Invoice Number</th>
+                                    <th>Net Amount</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -74,7 +75,8 @@
                                     <td>{{ $bill->id }}</td>
                                     <td>{{ $bill->user->first_name??'null' }}</td>
                                     <td>{{ $bill->room->room_number??'null' }}</td>
-                                    <td>{{ $bill->invoice_number }}</td>
+                                    <td>{{ $bill->invoice_number??'null' }}</td>
+                                    <td>{{ $bill->net_amount??'null' }}</td>
                                     <td>
                                         <a href="{{ route('bill-view',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>
                                         <a href="{{ route('bill-edit',[$bill->id]) }}" type="button" class="btn btn-success">Edit</a>

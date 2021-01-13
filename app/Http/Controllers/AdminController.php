@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,22 +9,21 @@ use Illuminate\Pagination\Paginator;
 use App\Http\Requests\StoreUsers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\View;
 use App\User;
 use App\Room;
 use App\Admin;
 use App\UserImage;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $results = Admin::get();
-        return view('admin-profile',['results'=>$results]);
+    public function index(Request $request, $id) {
+        //
     }
 
     /**
@@ -33,8 +31,7 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -44,8 +41,7 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -55,9 +51,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(){
+
+        $images = Admin::first();
+        return view('admin-profile', ['images'=>$images]);
     }
 
     /**
@@ -66,10 +63,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
-    {
-        $profile = Admin::find($id);
-        return view('edit-profile',['profile'=>$profile]);
+    public function edit(Request $request, $id) {
+
+        $profile=Admin::find($id);
+        return view('edit-profile', ['profile'=>$profile]);
     }
 
     /**
@@ -79,29 +76,27 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        // $validated = $request->validate([
-        // 'name' => 'required|min:4',
-        // 'image' => 'required'
-        // ]);
+     
+    public function update(Request $request, $id) {
+        $validated=$request->validate([ 
+            'name' => 'required',
+            'image' => 'required'
+            ]);
         $admin = Admin::where('id', $id)->first();
-        $admin->name = $request->name;
-        $admin->admin_image = $request->image;
-        $admin->save();
-
-        if($request->hasFile('image')){
-
-            $img = $request->file('image');
-            $adminImage = new Admin;
-            $adminImage->image = $admin->id;
-            $imageName = microtime().'.'.$img->extension();
-            $img->move(public_path('images'), $imageName);
-            $adminImage->image = $imageName;
-            $userImages->save();
+        $admin->name=$request->name;
+        $admin->admin_image=$request->image;
+        
+        if ($request->hasFile('image')){            
+            $files = $request->file('image');            
+            $filename = $files->getClientOriginalName();
+            $extension = $files->getClientOriginalExtension();
+            $fileName = microtime().".".$extension;
+            $files->move(public_path('images/'), $fileName);
+            $admin->admin_image = $fileName;
         }
-        return redirect()->route('admin-profile-index')->with('success', 'Profile Updated Successfully');
-    } 
+        $admin->save();
+        return redirect()->route('admin-profile')->with('success', 'Profile Updated Successfully');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -109,8 +104,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

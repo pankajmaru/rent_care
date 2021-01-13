@@ -20,9 +20,9 @@ Auth::routes();
       
       Route::group(['prefix'=>'admin'], function(){
 
-         Route::get('profile-index', 'AdminController@index')->name('admin-profile-index');
+         Route::get('profile', 'AdminController@show')->name('admin-profile');
          Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
-         Route::post('update/{id}', 'AdminController@update')->name('admin-update');
+         Route::post('update-profile/{id}', 'AdminController@update')->name('admin-update');
    });
 
    Route::group(['prefix'=>'tenant'], function(){

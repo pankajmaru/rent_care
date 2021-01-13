@@ -21,11 +21,9 @@ class BillsController extends Controller
         $query = Bill::query();
 
         if($request->has('year') && $request->year != '' ){
-            
             $query->whereYear('invoice.created_at',$request->year);
         }
-        if($request->has('month') && $request->month != '' ){
-            
+        if($request->has('month') && $request->month != '' ){            
             $query->whereMonth('invoice.created_at',$request->month);
         }
         if ($request->has('search') &&  $request->search != '')
@@ -72,6 +70,7 @@ class BillsController extends Controller
             'electricity_unit' => 'required',
             'water_unit' => 'required',
             ]);
+
         $bills = new Bill;        
         $bills->user_id = $request->user_id;
         $bills->room_id = $request->room_number;
@@ -80,6 +79,7 @@ class BillsController extends Controller
         $bills->water_unit = $request->water_unit;
         $bills->from_date = $request->from_date;
         $bills->to_date = $request->to_date;
+        $bills->net_amount = $request->electricity_unit;
         $bills->type = 'tenants';
         $bills->save();
         return redirect()->route('bill-index')->with('success', 'Bill Created Successfully');
@@ -131,6 +131,7 @@ class BillsController extends Controller
             'electricity_unit' => 'required',
             'water_unit' => 'required'
         ]);        
+        
         $bills = Bill::where('id', $id)->update([
             'user_id' => $request->user_id,
             'room_id' => $request->room_id,

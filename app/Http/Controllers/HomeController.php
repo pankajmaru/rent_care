@@ -3,6 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use App\Http\Requests\StoreUsers;
+use App\User;
+use App\Room;
+use App\Admin;
+use App\UserImage;
 
 class HomeController extends Controller
 {
@@ -23,13 +34,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-       
-        return view('home');
+       return view('home');
     }   
 
-    public function total_income()
-    {
-        //
-    }
+   
+
 
 }

@@ -86,7 +86,11 @@
                               </tr>                              
                               <tr class="border border-bottom-1 border-right-0">
                                  <th>Net Amount:-</th>
-                                 <td class="text-right text-danger"><b> {{ $net_amount = $rent_amount + $electricity_amount + $water_amount }} </b></td>
+                                 <td class="text-right text-danger">
+                                    <b>
+                                     {{ $net_amount = $rent_amount + $electricity_amount + $water_amount }}
+                                    </b>
+                                 </td>
                               </tr>
                            </table>
                         </div>

@@ -19,7 +19,9 @@ class UsersController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $users = User::count();
+        
+        return view('home',['users'=>$users]);
     }   
     
     /**
@@ -56,7 +58,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {   
-        $users = new User;        
+        $users = new User;
         $validated = $request->validate([
             'first_name' => 'required|min:4',
             'last_name' => 'required|min:3',
@@ -67,12 +69,10 @@ class UsersController extends Controller
             $users->first_name = $request->first_name;
             $users->last_name = $request->last_name;
             $users->mobile_number = $request->mobile_number;
-            $users->room_id = $request->room_number;
-            
+            $users->room_id = $request->room_number;            
             $users->save();
-
-            if($request->hasFile('image')){
-
+            if($request->hasFile('image'))
+            {
                 $img = $request->file('image');
                 $userImages = new UserImage;
                 $userImages->user_id = $users->id;
@@ -146,5 +146,7 @@ class UsersController extends Controller
     {
         $users = User::where('id', $id)->delete();
         return back()->withInput()->with('success', 'Tenant Deleted Successfully');
-    }  
+    }
+    
+    
 }

@@ -22,7 +22,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content">      
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -44,7 +44,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{ $users }}<sup style="font-size: 20px"></sup></h3>
                 <p>Total Tenants</p>
               </div>
               <div class="icon">

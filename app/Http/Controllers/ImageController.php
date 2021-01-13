@@ -98,19 +98,11 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        // $data = Image::find($id);
-        // print_r($data) ; die ;
-        // $image_path = public_path('images').'/'.$data->filename;
-        // unlink($image_path);
-        // $data->delete();
-        // if(Storage::delete($data->filename)) {
-        //     $data->delete();
-        //  }
-        // return redirect('/avatars');
+        //
     }
 
     public function upload(Request $request)
     {
-        
+        //
     }
 }
