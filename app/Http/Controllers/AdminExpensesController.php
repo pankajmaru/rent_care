@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,18 +14,21 @@ use Illuminate\Support\Facades\View;
 use App\User;
 use App\Room;
 use App\Admin;
-use App\UserImage;
 use App\AdminExpenses;
+use App\UserImage;
 
-class AdminController extends Controller {
-
+class AdminExpensesController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id) {
+    public function index()
+    {
         //
+        
+        return view('home',['expenses'=>$expenses]);
     }
 
     /**
@@ -32,9 +36,9 @@ class AdminController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        
-        //
+    public function create()
+    {
+        return view('admin-expenses');
     }
 
     /**
@@ -43,10 +47,17 @@ class AdminController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         
-        //
+        $expenses = new AdminExpenses;
+        $validated = $request->validate([
+            'maintenance' => 'required',
+            ]);
 
+        $expenses->maintenance = $request->maintenance;
+        $expenses->save();
+        return redirect()->route('dashboard')->with('success', 'Expenses Add Successfully');
     }
 
     /**
@@ -55,10 +66,9 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(){
-
-        $images = Admin::first();
-        return view('admin-profile', ['images'=>$images]);
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -67,10 +77,9 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id) {
-
-        $profile=Admin::find($id);
-        return view('edit-profile', ['profile'=>$profile]);
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -80,26 +89,9 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     
-    public function update(Request $request, $id) {
-        $validated=$request->validate([ 
-            'name' => 'required',
-            'image' => 'required'
-            ]);
-        $admin = Admin::where('id', $id)->first();
-        $admin->name=$request->name;
-        $admin->admin_image=$request->image;
-        
-        if ($request->hasFile('image')){            
-            $files = $request->file('image');            
-            $filename = $files->getClientOriginalName();
-            $extension = $files->getClientOriginalExtension();
-            $fileName = microtime().".".$extension;
-            $files->move(public_path('images/'), $fileName);
-            $admin->admin_image = $fileName;
-        }
-        $admin->save();
-        return redirect()->route('admin-profile')->with('success', 'Profile Updated Successfully');
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**
@@ -108,7 +100,8 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 }

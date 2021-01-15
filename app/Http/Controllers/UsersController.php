@@ -12,17 +12,21 @@ use Illuminate\Http\File;
 use App\Http\Requests\StoreUsers;
 use App\User;
 use App\Room;
+use App\Bill;
 use App\Admin;
 use App\UserImage;
+use App\AdminExpenses;
 
 class UsersController extends Controller
 {
     public function home()
     {
         $users = User::count();
-        
-        return view('home',['users'=>$users]);
-    }   
+        $total_bills = Bill::pluck('net_amount')->sum();
+        $total_dues = Bill::pluck('total_dues')->sum();
+        $expenses = AdminExpenses::pluck('maintenance')->sum();
+        return view('home',['users'=>$users,'total_bills'=>$total_bills,'total_dues'=>$total_dues,'expenses'=>$expenses]);
+    }
     
     /**
      * Display a listing of the resource.

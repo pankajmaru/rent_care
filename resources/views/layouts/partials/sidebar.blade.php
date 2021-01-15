@@ -25,11 +25,8 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
+                        <p>Dashboard<i class="fas fa-angle-left right"></i></p>                        
+                    </a>                    
                     <ul class="nav nav-treeview">
                         <li class="nav-item ml-3">
                             <a href="{{ route('dashboard') }}" class="nav-link">
@@ -41,11 +38,28 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Landlord Management<i class="fas fa-angle-left right"></i></p>                        
+                    </a>                    
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-3">
+                            <a href="{{ route('add-landlord-expenses') }}" class="nav-link">
+                                <i class="far fa-circle ml-3"></i>
+                                <p>Landlord Expenses</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle ml-3"></i>
+                                <p>Document Vault</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-users"></i>
-                        <p class="ml-2">
-                            Tenant Management
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
+                        <p class="ml-2">Tenant Management<i class="fas fa-angle-left right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item ml-3">

@@ -12,18 +12,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
    Route::group(['middleware' => ['auth','isadmin']], function() {
-      
-      Route::get('/', 'UsersController@home')->name('dashboard');
-      
-      Route::group(['prefix'=>'admin'], function(){
 
-         Route::get('profile', 'AdminController@show')->name('admin-profile');
-         Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
-         Route::post('update-profile/{id}', 'AdminController@update')->name('admin-update');
+   Route::get('/', 'UsersController@home')->name('dashboard');
+   
+   Route::group(['prefix'=>'admin'], function(){
+      Route::get('profile', 'AdminController@show')->name('admin-profile');
+      Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
+      Route::post('update-profile/{id}', 'AdminController@update')->name('admin-update');
    });
+
+   Route::group(['prefix'=>'landlord'], function(){
+      Route::get('expenses-create', 'LandlordController@create')->name('add-landlord-expenses');
+      Route::get('expenses-store', 'LandlordController@store')->name('store-landlord-expenses');
+   });
+
+   // Route::group(['prefix'=>'admin-expenses'], function(){
+   //    Route::get('create', 'AdminExpensesController@create')->name('add-admin-expenses');
+   //    Route::get('store', 'AdminExpensesController@store')->name('store-admin-expenses');
+   // });
 
    Route::group(['prefix'=>'tenant'], function(){
       Route::get('index', 'UsersController@index')->name('tenant-index');

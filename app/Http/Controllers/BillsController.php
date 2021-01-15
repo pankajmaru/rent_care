@@ -9,6 +9,7 @@ use App\User;
 use App\Room;
 use App\Bill;
 
+
 class BillsController extends Controller
 {
     /**
@@ -46,9 +47,10 @@ class BillsController extends Controller
      */
     public function create()
     {
-        $users = User::pluck('first_name','id');        
-        $rooms = Room::pluck('room_number', 'room_id');
-        return view('new-bill',['users'=>$users,'rooms'=>$rooms]);
+        $users = User::pluck('first_name','id');
+        $rooms = Room::pluck('room_number','room_id');
+        $rent = Room::pluck('rent_amount','room_id');
+        return view('new-bill',['users'=>$users,'rooms'=>$rooms,'rent'=>$rent]);
     }
 
     /**
@@ -73,14 +75,23 @@ class BillsController extends Controller
 
         $bills = new Bill;        
         $bills->user_id = $request->user_id;
-        $bills->room_id = $request->room_number;
+        $bills->room_id = $request->room_number;        
+        $rentamount = $bills->room->rent_amount;
+        $toal_elce_unit = $request->electricity_unit * '9';
+        $toal_water_unit = $request->water_unit * '9';
+        $total_rent_amount = $rentamount + $toal_elce_unit + $toal_water_unit;
         $bills->invoice_number = $request->invoice_number;
-        $bills->electricity_unit = $request->electricity_unit;
-        $bills->water_unit = $request->water_unit;
+        $bills->electricity_unit = $toal_elce_unit;
+        $bills->water_unit = $toal_water_unit;
         $bills->from_date = $request->from_date;
         $bills->to_date = $request->to_date;
-        $bills->net_amount = $request->electricity_unit;
+        $bills->net_amount = $total_rent_amount;
+        $paid_amount = $request->total_paid;
+        $bills->total_paid  = $paid_amount;
+        $due_amount = $total_rent_amount - $paid_amount;
+        $bills->total_dues = $due_amount;
         $bills->type = 'tenants';
+        
         $bills->save();
         return redirect()->route('bill-index')->with('success', 'Bill Created Successfully');
     }

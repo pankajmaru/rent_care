@@ -34,8 +34,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
-                                    {!! Form::label('room number', 'Room Number', ['class' => 'col-md-6 control-label'])
-                                    !!}
+                                    {!! Form::label('room number', 'Room Number', ['class' => 'col-md-6 control-label']) !!}
                                     {!! Form::select('room_number', $rooms, null , ['class' => 'form-control','placeholder' => 'Select Room']) !!}
                                     @if ($errors->has('room_number'))
                                     <span style="color:red;">{{ $errors->first('room_number') }}</span>
@@ -71,7 +70,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                  {!! Form::label('rent amount', 'Rent Amount', ['class' => 'col-md-6 control-label']) !!}
-                                 {!! Form::text('rent_amount', $value = old('rent_amount'), ['class' => 'form-control', 'placeholder' => 'Rent Amount']) !!}                                    
+                                 {!! Form::select('rent_amount', $rent, null , ['class' => 'form-control','placeholder' => 'Select Rent Amount']) !!}
                                     @if ($errors->has('rent_amount'))
                                     <span style="color:red;">{{ $errors->first('rent_amount') }}</span>
                                     @endif
@@ -89,6 +88,20 @@
                                     @if ($errors->has('water_unit'))
                                     <span style="color:red;">{{ $errors->first('water_unit') }}</span>
                                     @endif
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {!! Form::label('total paid', 'Total Paid', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::text('total_paid', $value = old('total_paid'), ['class' => 'form-control', 'placeholder' => 'Total Paid']) !!}
+                                       @if ($errors->has('total_paid'))
+                                       <span style="color:red;">{{ $errors->first('total_paid') }}</span>
+                                       @endif
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {!! Form::label('total dues', 'Total Dues', ['class' => 'col-md-6 control-label']) !!}
+                                    {!! Form::text('total_dues', $value = old('total_dues'), ['class' => 'form-control', 'placeholder' => 'Total Dues']) !!}
+                                       @if ($errors->has('total_dues'))
+                                       <span style="color:red;">{{ $errors->first('total_dues') }}</span>
+                                       @endif
                                 </div>
                             </div>
                             <div class="row no-print">

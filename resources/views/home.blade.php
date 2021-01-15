@@ -30,11 +30,11 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3 class="text-light"><i class="fas fa-rupee-sign"></i> {{ $total_bills }}</h3>
                 <p>Total Income</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fas fa-coins"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -44,11 +44,11 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{ $users }}<sup style="font-size: 20px"></sup></h3>
+                <h3>{{ $users }} tenants<sup style="font-size: 20px"></sup></h3>
                 <p>Total Tenants</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-users"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -58,7 +58,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3><i class="fas fa-rupee-sign"></i> {{ $total_dues }}</h3>
                 <p>Total Dues</p>
               </div>
               <div class="icon">
@@ -72,7 +72,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3> <i class="fas fa-rupee-sign"></i> {{ $expenses }}</h3>
                 <p>Total Expenses</p>
               </div>
               <div class="icon">
@@ -84,12 +84,12 @@
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
-              <div class="inner">
-                <h3>65</h3>
+              <div class="inner">                
+                <h3> <i class="fas fa-rupee-sign"></i> {{  $total_profit = $total_bills - $total_dues - $expenses }} </h3>
                 <p>Total Profit</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-pie-graph"></i>s
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

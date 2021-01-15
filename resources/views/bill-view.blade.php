@@ -74,21 +74,21 @@
                            <table class="table">
                               <tr>
                                  <th style="width:50%">Rent Amount:-</th>
-                                 <td class="text-right text-danger"><b> {{ $rent_amount = $bills->room->rent_amount }} </b></td>
+                                 <td class="text-right text-danger"><b> {{ $bills->room->rent_amount }} </b></td>
                               </tr>
                               <tr>
                                  <th style="width:50%">Electricity Unit:-</th>
-                                 <td class="text-right text-danger"><b> {{ $electricity_amount = $bills->electricity_unit * '9' }} </b></td>
+                                 <td class="text-right text-danger"><b> {{ $bills->electricity_unit }} </b></td>
                               </tr>
                               <tr>
                                  <th style="width:50%">Water Unit:-</th>
-                                 <td class="text-right text-danger"><b> {{ $water_amount = $bills->water_unit * '9' }} </b></td>
+                                 <td class="text-right text-danger"><b> {{ $bills->water_unit }} </b></td>
                               </tr>                              
                               <tr class="border border-bottom-1 border-right-0">
                                  <th>Net Amount:-</th>
                                  <td class="text-right text-danger">
                                     <b>
-                                     {{ $net_amount = $rent_amount + $electricity_amount + $water_amount }}
+                                     {{ $bills->net_amount }}
                                     </b>
                                  </td>
                               </tr>
