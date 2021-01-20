@@ -51,7 +51,7 @@
                         <li class="nav-item ml-3">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle ml-3"></i>
-                                <p>Document Vault</p>
+                                <p>Document Wallet</p>
                             </a>
                         </li>
                     </ul>

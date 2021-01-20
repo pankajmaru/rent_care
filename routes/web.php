@@ -16,24 +16,34 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
    Route::group(['middleware' => ['auth','isadmin']], function() {
-
-   Route::get('/', 'UsersController@home')->name('dashboard');
+      Route::get('/', 'UsersController@home')->name('dashboard');
    
    Route::group(['prefix'=>'admin'], function(){
       Route::get('profile', 'AdminController@show')->name('admin-profile');
       Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
       Route::post('update-profile/{id}', 'AdminController@update')->name('admin-update');
+   });  
+
+   Route::group(['prefix'=>'bill'], function(){
+      Route::any('index','BillsController@index')->name('bill-index');
+      Route::any('store','BillsController@store')->name('bill-store');
+      Route::any('create','BillsController@create')->name('bill-create');
+      Route::any('show/{id}','BillsController@show')->name('bill-view');
+      Route::any('edit/{id}','BillsController@edit')->name('bill-edit');
+      Route::any('update/{id}','BillsController@update')->name('bill-update');
+      Route::any('delete/{id}','BillsController@destroy')->name('bill-delete');
+      Route::get('mail/send/{id}', 'BillsController@send')->name('bill-mail-send');
+   });
+   
+   Route::group(['prefix'=>'pdf'], function(){
+      Route::get('index', 'DynamicPDFController@index')->name('pdf-index');
+      Route::get('generate', 'DynamicPDFController@pdf')->name('pdf-generate');
    });
 
    Route::group(['prefix'=>'landlord'], function(){
       Route::get('expenses-create', 'LandlordController@create')->name('add-landlord-expenses');
       Route::get('expenses-store', 'LandlordController@store')->name('store-landlord-expenses');
-   });
-
-   // Route::group(['prefix'=>'admin-expenses'], function(){
-   //    Route::get('create', 'AdminExpensesController@create')->name('add-admin-expenses');
-   //    Route::get('store', 'AdminExpensesController@store')->name('store-admin-expenses');
-   // });
+   });  
 
    Route::group(['prefix'=>'tenant'], function(){
       Route::get('index', 'UsersController@index')->name('tenant-index');
@@ -54,15 +64,7 @@ Auth::routes();
       Route::any('delete/{id}', 'RoomsController@destroy')->name('room-delete');
    });
 
-   Route::group(['prefix'=>'bill'], function(){
-      Route::any('index','BillsController@index')->name('bill-index');
-      Route::any('store','BillsController@store')->name('bill-store');
-      Route::any('create','BillsController@create')->name('bill-create');
-      Route::any('show/{id}','BillsController@show')->name('bill-view');
-      Route::any('edit/{id}','BillsController@edit')->name('bill-edit');
-      Route::any('update/{id}','BillsController@update')->name('bill-update');
-      Route::any('delete/{id}','BillsController@destroy')->name('bill-delete');
-   });
+  
 
    Route::group(['prefix'=>'tenant-image'], function(){
       Route::get('create','ImageController@create')->name('tenant-image-create');
@@ -71,6 +73,5 @@ Auth::routes();
       Route::get('index','ImageController@index')->name('tenant-image-index');
       Route::post('edit/{id}','ImageController@edit')->name('tenant-image-edit');
       Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
-   });
-
+   });   
 });

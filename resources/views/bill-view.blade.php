@@ -21,6 +21,12 @@
    </section>
    <section class="content">
       <div class="container-fluid">
+         @if (session('success'))
+         <div class="alert alert-primary alert-dismissible col-md-4 offset-4">
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+             <strong>{{ session('success') }}</strong>
+         </div>
+         @endif
          <div class="row">
             <div class="col-12 ">
                <div class="callout callout-info text-center text-danger bg-info">
@@ -93,6 +99,15 @@
                                  </td>
                               </tr>
                            </table>
+                           {{-- <a href="{{ route('generate-pdf',['download'=>'pdf']) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">
+                              <i class="fas fa-download"></i> 
+                              Generate PDF
+                           </a> --}}
+                           {{-- {{ dd($bills->id) }} --}}
+                           <a href="{{ route('bill-mail-send',[$bills->id]) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">
+                              <i class="fas fa-paper-plane mr-1"></i>
+                              Send Mail
+                           </a>
                         </div>
                      </div>
                      <!-- /.col -->

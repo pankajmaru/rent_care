@@ -4,14 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
-use App\User;
-use App\Room;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use App\Http\Requests\StoreUsers;
 use App\Bill;
+use App\Admin;
+use App\UserImage;
+use App\Mail\TestMail;
+use App\AdminExpenses;
+use App\Room;
+use PDF;
+use Mail;
+use snappy;
 
 
 class BillsController extends Controller
 {
+
+    public function send(Request $request, $id)
+    {
+        $bills = ['invoice_number','electricity_unit'];
+        \Mail::to('pkmaru1993@gmail.com')->send(new TestMail($bills));
+        return back()->withInput()->with('success', 'Mail Send Successfully');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +59,7 @@ class BillsController extends Controller
             ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%')
             ->orWhere('invoice.invoice_number', 'like', '%' . $search_text . '%');
         }
+
         $bills = $query->get();
         return view('bill-list',compact('bills'));
     }
@@ -165,5 +189,10 @@ class BillsController extends Controller
     {
         $bills = Bill::where('id', $id)->delete();
         return back()->withInput()->with('success', 'Bills Deleted Successfully');
-    }   
+    }
+
+
+
+
+
 }
