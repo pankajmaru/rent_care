@@ -99,11 +99,10 @@
                                  </td>
                               </tr>
                            </table>
-                           {{-- <a href="{{ route('generate-pdf',['download'=>'pdf']) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">
-                              <i class="fas fa-download"></i> 
+                           <a href="{{ route('bill-pdf-generate',[$bills->id]) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">                              
+                              <i class="fas fa-file-pdf mr-1"></i>
                               Generate PDF
-                           </a> --}}
-                           {{-- {{ dd($bills->id) }} --}}
+                           </a>
                            <a href="{{ route('bill-mail-send',[$bills->id]) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">
                               <i class="fas fa-paper-plane mr-1"></i>
                               Send Mail

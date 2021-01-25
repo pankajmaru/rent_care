@@ -10,6 +10,14 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div class="col-md-4 offset-4">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{ session('success') }}</strong>
+                </div>
+                @endif
+        </div>
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -30,19 +38,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session('success'))
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>{{ session('success') }}</strong>
-                        </div>
-                        @endif
                         <div class="card-header">
                             <nav class="navbar navbar-light">
                                 {!! Form::open(['method' => 'get', 'route' => 'room-index', 'role' => 'form', 'class' => 'form-inline']) !!}
-                                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search Tenants" aria-label="Search">
+                                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search Rooms" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
                                 {!! Form::close() !!}
-                                <a href="{{ route('room-add') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Room</a>
+                                <a href="{{ route('room-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Room</a>
                             </nav>
                         </div>
                         <!-- /.card-header -->

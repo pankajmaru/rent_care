@@ -58,7 +58,7 @@ class AdminController extends Controller {
     public function show(){
 
         $images = Admin::first();
-        return view('admin-profile', ['images'=>$images]);
+        return view('admin.admin-profile', ['images'=>$images]);
     }
 
     /**
@@ -69,8 +69,8 @@ class AdminController extends Controller {
      */
     public function edit(Request $request, $id) {
 
-        $profile=Admin::find($id);
-        return view('edit-profile', ['profile'=>$profile]);
+        $profile = Admin::find($id);
+        return view('admin.edit-admin-profile', ['profile'=>$profile]);
     }
 
     /**

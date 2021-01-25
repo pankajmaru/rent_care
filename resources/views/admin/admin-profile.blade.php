@@ -28,11 +28,10 @@
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
-                            <a href="{{ route('edit-profile',$images->id) }}"><i
+                            <a href="{{ route('edit-admin-profile',$images->id) }}"><i
                                     class="fas fa-user-edit fa-2x text-primary link"></i> Edit Profile</a>
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle"
-                                    src="{{ asset('/images').'/'.$images->admin_image }}" alt="User profile picture">
+                                <img class="profile-user-img img-circle" src="{{ asset('/images').'/'.$images->admin_image }}" alt="User profile picture">
                                     <br>
                                 <a href="#" class="display-4">
                                     {{ Auth::user()->name }}

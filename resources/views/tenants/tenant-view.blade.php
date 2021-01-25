@@ -38,7 +38,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label>First Name</label>
+                                    <label>First Name</label>                                    
                                     <input type="text" class="form-control" placeholder="First Name" name="first_name"
                                         value="{{ $user->first_name  }}" disabled>
                                     <span style="color:red;"></span>
@@ -61,18 +61,16 @@
                                         value="{{ $user->get_room->room_number ?? 'null' }}" disabled>
                                     <span style="color:red;"></span>
                                 </div>
-                                <div class="row">
+                                <div class="row ml-3 mt-5">                                    
                                     @if(!empty($user->get_images))
                                     @foreach ($user->get_images as $images)
                                     <img src="{{ asset('/images').'/'.$images->image }}" width="250px" height="250px">
                                     @endforeach
                                     @endif
-                                    <div class='col-md-4'></div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             {!! Form::close() !!}
-
                         </div>
                     </div>
                 </div>

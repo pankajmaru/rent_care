@@ -17,4 +17,5 @@ class Bill extends Model
     {
         return $this->belongsTo('App\Room','room_id','room_id');
     }
+  
 }

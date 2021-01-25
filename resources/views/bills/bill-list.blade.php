@@ -8,10 +8,18 @@
             your Data Deleted Successfully!!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>
+            </button>           
         </div>
-        <div class="container-fluid">
-            <div class="row mb-2">
+        <div class="col-md-4 offset-4">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{ session('success') }}</strong>
+                </div>
+                @endif
+        </div>
+        <div class="container-fluid">            
+            <div class="row mb-2">                
                 <div class="col-sm-6">
                     <h1 id="btn"> Bill lists</h1>
                 </div>
@@ -30,12 +38,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session('success'))
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>{{ session('success') }}</strong>
-                        </div>
-                        @endif
                         <div class="card-header">
                             <div class="row">
                                 <nav class="navbar navbar-light">
@@ -67,6 +69,12 @@
                             </thead>
                             <tbody>
                                 @php
+                                $number = 1;
+                                $numElementsPerPage = 5; // How many elements per page
+                                $pageNumber = isset($_GET['page']) ? $_GET['page'] : 1 ;
+                                $currentNumber = ($pageNumber - 1) * $numElementsPerPage + $number;
+                                @endphp
+                                @php
                                 $i = 1;
                                 @endphp
                                 @foreach ($bills as $bill)
@@ -90,11 +98,16 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <!-- /.col -->
+                <!-- /.col -->                               
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+        <div class="row">
+            <div class="col-md-5 offset-5 mt-3">
+                <span>{{ $bills->links() }}</span>
+            </div>
+        </div> 
     </section>
     <!-- /.content -->
 </div>

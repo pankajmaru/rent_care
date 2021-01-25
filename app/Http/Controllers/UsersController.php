@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\File;
 use App\Http\Requests\StoreUsers;
 use App\User;
@@ -33,10 +34,29 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $users = User::orderBy('id', 'DESC')->paginate(5);
-        return view('list-tenant',['users'=>$users]);
+        $query = User::query();
+        
+        if($request->has('year') && $request->year != '' ){
+            $query->whereYear('users.created_at',$request->year);
+        }
+        if($request->has('month') && $request->month != '' ){            
+            $query->whereMonth('users.created_at',$request->month);
+        }
+        if ($request->has('search') &&  $request->search != '')
+        {
+            $search_text = $request->search;
+            $query->join('rooms', 'rooms.room_id', '=', 'users.room_id')
+            ->where('users.first_name', 'like', '%' . $search_text . '%')
+            ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%')
+            ->orWhere('users.last_name', 'like', '%' . $search_text . '%')
+            ->orWhere('users.mobile_number', 'like', '%' . $search_text . '%')
+            ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%');
+        }
+
+        $users = $query->orderBy('id', 'DESC')->paginate(5);
+        return view('tenants.tenant-list',['users'=>$users]);
     }
 
     /**
@@ -48,10 +68,7 @@ class UsersController extends Controller
     public function create(){
 
         $rooms = Room::pluck('room_number', 'room_id');
-        return view('add-tenant',['rooms'=>$rooms]);
-
-        // $rooms = Room::get();
-        // return view('add-tenant',['rooms'=>$rooms]);
+        return view('tenants.tenant-create',['rooms'=>$rooms]);
     }   
 
     /**
@@ -97,7 +114,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('view-tenant',['user'=>$user]);
+        return view('tenants.tenant-view',['user'=>$user]);
     }
 
     /**
@@ -110,7 +127,7 @@ class UsersController extends Controller
     {
         $users = User::find($id);
         $rooms = Room::all();
-        return view('edit-tenant', ['users'=>$users,'rooms'=>$rooms]);
+        return view('tenants.tenant-edit',['users'=>$users,'rooms'=>$rooms]);
     }
 
     /**
@@ -135,8 +152,17 @@ class UsersController extends Controller
         $users->last_name = $request->last_name;
         $users->mobile_number = $request->mobile_number;
         $users->room_id = $request->room_id;
-        $users->image = $images;
-        $users->save();
+        // $users->save();
+
+        if($request->hasfile('image')){
+            $img = $request->file('image');
+            $userImages = UserImage::where('id', $id);
+            // $userImages->user_id = $users->id;
+            $imageName = microtime().'.'.$img->extension();
+            $img->move(public_path('images'), $imageName);
+            $userImages->image = $imageName;
+            $userImages->save();
+        }
         return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
     }        
 

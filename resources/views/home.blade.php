@@ -62,7 +62,7 @@
                 <p>Total Dues</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fas fa-money-bill"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -85,11 +85,11 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">                
-                <h3> <i class="fas fa-rupee-sign"></i> {{  $total_profit = $total_bills - $total_dues - $expenses }} </h3>
+                <h3><i class="fas fa-rupee-sign"></i> {{  $total_profit = $total_bills - $total_dues - $expenses }} </h3>
                 <p>Total Profit</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>s
+                <i class="fas fa-money-bill-wave"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

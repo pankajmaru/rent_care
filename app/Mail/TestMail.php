@@ -28,7 +28,7 @@ class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $bills = ['invoice_number','electricity_unit'];
+     public $bills = '';
     
     /**
      * Create a new message instance.
@@ -38,7 +38,7 @@ class TestMail extends Mailable
 
     public function __construct($bills)
     {
-        $this->bill = $bills = ['invoice_number','electricity_unit'];
+        $this->bills = $bills;
     }
     
     /**
@@ -49,6 +49,7 @@ class TestMail extends Mailable
    
     public function build()
     {
-        return $this->subject('Bill Details from rent care department')->view('emails.TestMail');
+        $bills = $this->bills;
+        return $this->subject('Bill Details from rent care department')->view('emails.send-mail',compact('bills'));
     }
 }

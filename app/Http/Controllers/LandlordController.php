@@ -37,7 +37,7 @@ class LandlordController extends Controller
      */
     public function create()
     {
-        return view('add-landlord-expenses');
+        return view('landlord.create-landlord-expenses');
     }
 
     /**
@@ -54,14 +54,14 @@ class LandlordController extends Controller
             'total_electricity_bill' => 'required',
             'total_water_bill' => 'required',
             'maintenance' => 'required',
-            ]);
-        
+        ]);
+
         $landlord_expenses->month = $request->month;
         $landlord_expenses->total_electricity_bill = $request->total_electricity_bill;
         $landlord_expenses->total_water_bill = $request->total_water_bill;
         $landlord_expenses->maintenance = $request->maintenance;
         $landlord_expenses->save();
-        return redirect()->route('dashboard')->with('success', 'Expenses Add Successfully');
+        return redirect()->route('add-landlord-expenses')->with('success', 'Expenses Added Successfully');
     }
 
     /**

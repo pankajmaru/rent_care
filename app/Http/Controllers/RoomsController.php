@@ -13,10 +13,19 @@ class RoomsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = Room::all();
-        return view('room-list',['rooms'=>$rooms]);
+        $query = Room::query();
+
+        if ($request->has('search') &&  $request->search != '')
+        {
+            $search_text = $request->search;
+            $query->where('rooms.rent_amount', 'like', '%' . $search_text . '%')
+            ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%');
+        }   
+        
+        $rooms = $query->orderBy('room_id', 'DESC')->paginate(5);
+        return view('rooms.room-list',['rooms'=>$rooms]);
     }
 
     /**
@@ -26,7 +35,7 @@ class RoomsController extends Controller
      */
     public function create()
     {
-        return view('add-room');
+        return view('rooms.room-create');
     }
 
     /**
@@ -68,7 +77,7 @@ class RoomsController extends Controller
     public function edit(Request $request, $id)
     {
         $room = Room::where('room_id', $id)->first();
-        return view('edit-room',['room'=>$room]);
+        return view('rooms.room-edit',['room'=>$room]);
     }
 
     /**
@@ -107,6 +116,6 @@ class RoomsController extends Controller
     {
         $search_text = $_GET['search'];
         $search_results = Room::where(function ($query) use($search_text) {$query->where('room_number', 'like', '%' . $search_text . '%')->orWhere('rent_amount', 'like', '%' . $search_text . '%');})->get();                
-        return view('room-search-list',['search_results'=>$search_results]);
+        return view('rooms.room-search-list',['search_results'=>$search_results]);
     }
 }

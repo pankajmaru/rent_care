@@ -27,10 +27,9 @@ use snappy;
 
 class BillsController extends Controller
 {
-
     public function send(Request $request, $id)
     {
-        $bills = ['invoice_number','electricity_unit'];
+        $bills = Bill::where('id', $id)->first();
         \Mail::to('pkmaru1993@gmail.com')->send(new TestMail($bills));
         return back()->withInput()->with('success', 'Mail Send Successfully');
     }
@@ -43,7 +42,7 @@ class BillsController extends Controller
     public function index(Request $request)
     {
         $query = Bill::query();
-
+        
         if($request->has('year') && $request->year != '' ){
             $query->whereYear('invoice.created_at',$request->year);
         }
@@ -59,9 +58,8 @@ class BillsController extends Controller
             ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%')
             ->orWhere('invoice.invoice_number', 'like', '%' . $search_text . '%');
         }
-
         $bills = $query->get();
-        return view('bill-list',compact('bills'));
+        return view('bills.bill-list',compact('bills'));
     }
 
     /**s
@@ -74,7 +72,7 @@ class BillsController extends Controller
         $users = User::pluck('first_name','id');
         $rooms = Room::pluck('room_number','room_id');
         $rent = Room::pluck('rent_amount','room_id');
-        return view('new-bill',['users'=>$users,'rooms'=>$rooms,'rent'=>$rent]);
+        return view('bills.bill-create',['users'=>$users,'rooms'=>$rooms,'rent'=>$rent]);
     }
 
     /**
@@ -129,7 +127,7 @@ class BillsController extends Controller
     public function show($id)
     {
         $bills = Bill::find($id);
-        return view('bill-view',['bills'=>$bills]);
+        return view('bills.bill-view',['bills'=>$bills]);
     }
 
     /**
@@ -143,7 +141,7 @@ class BillsController extends Controller
         $bills = Bill::find($id);
         $users = User::all();
         $rooms = Room::all();
-        return view('bill-edit',['bills'=>$bills,'users'=>$users,'rooms'=>$rooms]);
+        return view('bills.bill-edit',['bills'=>$bills,'users'=>$users,'rooms'=>$rooms]);
     }
 
     /**
@@ -189,10 +187,57 @@ class BillsController extends Controller
     {
         $bills = Bill::where('id', $id)->delete();
         return back()->withInput()->with('success', 'Bills Deleted Successfully');
+    }  
+    
+    // pdf maker function //
+            
+    function pdfview(Request $request, $id)
+    {
+        $bills = $this->get_data();
+        return view('pdf-view')->with('bills', $bills);
+    }
+    
+    function get_data($id)
+    {
+        $bills = Bill::find($id);
+        return $bills;
+    }
+    
+    function pdf($id)
+    {        
+        $pdf = \App::make('dompdf.wrapper'); 
+        $pdf->loadHTML($this->convert_customer_data_to_html($id));
+        return $pdf->stream();
     }
 
+    function convert_customer_data_to_html($id)
+    {        
+     $bills = $this->get_data($id);     
+     $output = '<h3 align="center">Rent Bill</h3>
+      <table width="100%" style="border-collapse: collapse; border: 0px;">
+        <tr>
+      <th style="border: 1px solid; padding:12px;" width="20%">Name</th>
+      <th style="border: 1px solid; padding:12px;" width="30%">Invoice Number</th>
+      <th style="border: 1px solid; padding:12px;" width="30%">Rent Amount</th>
+      <th style="border: 1px solid; padding:12px;" width="15%">Electricity Unit</th>
+      <th style="border: 1px solid; padding:12px;" width="15%">Water Unit</th>
+      <th style="border: 1px solid; padding:12px;" width="20%">Net Amount</th>
+      <th style="border: 1px solid; padding:12px;" width="20%">Total Paid</th>
+      <th style="border: 1px solid; padding:12px;" width="20%">Total Dues</th>
+      </tr>';
 
+      $output .= '<tr>
+      <td style="border: 1px solid; padding:12px;">'.$bills->user->first_name.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->invoice_number.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->room->rent_amount.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->electricity_unit.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->water_unit.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->net_amount.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->total_paid.'</td>
+        <td style="border: 1px solid; padding:12px;">'.$bills->total_dues.'</td>
+      </tr>';
 
-
-
+     $output .= '</table>';
+     return $output;
+    }
 }

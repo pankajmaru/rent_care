@@ -26,14 +26,14 @@
                 <div class="col-md-5 justify-content-center offset-3">
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline text-center">
-                        {!! Form::open(['file' => 'true', 'method' => 'post', 'route' => ['admin-update',$profile->id] , 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::model($profile, array('route' => array('update-admin-profile',$profile->id), 'files' => 'true')) !!}
                         @csrf
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-8 offset-2">
                                     {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}
                                     <br>
-                                    {!! Form::text('name', '' , ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+                                    {!! Form::text('name',  $value = old('name') , ['class' => 'form-control', 'placeholder' => 'Name']) !!}
                                     @if ($errors->has('name'))
                                     <span style="color:red;">{{ $errors->first('name') }}</span>
                                     @endif

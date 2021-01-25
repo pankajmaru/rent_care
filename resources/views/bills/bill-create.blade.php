@@ -92,16 +92,16 @@
                                 <div class="form-group col-md-6">
                                     {!! Form::label('total paid', 'Total Paid', ['class' => 'col-md-6 control-label']) !!}
                                     {!! Form::text('total_paid', $value = old('total_paid'), ['class' => 'form-control', 'placeholder' => 'Total Paid']) !!}
-                                       @if ($errors->has('total_paid'))
-                                       <span style="color:red;">{{ $errors->first('total_paid') }}</span>
-                                       @endif
+                                    @if ($errors->has('total_paid'))
+                                    <span style="color:red;">{{ $errors->first('total_paid') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     {!! Form::label('total dues', 'Total Dues', ['class' => 'col-md-6 control-label']) !!}
                                     {!! Form::text('total_dues', $value = old('total_dues'), ['class' => 'form-control', 'placeholder' => 'Total Dues']) !!}
-                                       @if ($errors->has('total_dues'))
-                                       <span style="color:red;">{{ $errors->first('total_dues') }}</span>
-                                       @endif
+                                    @if ($errors->has('total_dues'))
+                                    <span style="color:red;">{{ $errors->first('total_dues') }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row no-print">

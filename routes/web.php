@@ -20,8 +20,8 @@ Auth::routes();
    
    Route::group(['prefix'=>'admin'], function(){
       Route::get('profile', 'AdminController@show')->name('admin-profile');
-      Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-profile');
-      Route::post('update-profile/{id}', 'AdminController@update')->name('admin-update');
+      Route::get('edit-profile/{id}', 'AdminController@edit')->name('edit-admin-profile');
+      Route::post('update-profile/{id}', 'AdminController@update')->name('update-admin-profile');
    });  
 
    Route::group(['prefix'=>'bill'], function(){
@@ -33,13 +33,10 @@ Auth::routes();
       Route::any('update/{id}','BillsController@update')->name('bill-update');
       Route::any('delete/{id}','BillsController@destroy')->name('bill-delete');
       Route::get('mail/send/{id}', 'BillsController@send')->name('bill-mail-send');
-   });
+      Route::get('pdf/generate/{id}', 'BillsController@pdf')->name('bill-pdf-generate');
+      
+   }); 
    
-   Route::group(['prefix'=>'pdf'], function(){
-      Route::get('index', 'DynamicPDFController@index')->name('pdf-index');
-      Route::get('generate', 'DynamicPDFController@pdf')->name('pdf-generate');
-   });
-
    Route::group(['prefix'=>'landlord'], function(){
       Route::get('expenses-create', 'LandlordController@create')->name('add-landlord-expenses');
       Route::get('expenses-store', 'LandlordController@store')->name('store-landlord-expenses');
@@ -51,14 +48,14 @@ Auth::routes();
       Route::get('create', 'UsersController@create')->name('tenant-create');
       Route::get('show/{id}', 'UsersController@show')->name('tenant-show');
       Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
-      Route::any('update/{id}','UsersController@update')->name('tenant-update');
+      Route::post('update/{id}','UsersController@update')->name('tenant-update');
       Route::any('delete/{id}', 'UsersController@destroy')->name('tenant-delete');
    });
 
    Route::group(['prefix'=>'room'], function(){
-      Route::any('add', 'RoomsController@create')->name('room-add');
       Route::any('index', 'RoomsController@index')->name('room-index');
       Route::any('store', 'RoomsController@store')->name('room-store');
+      Route::any('create', 'RoomsController@create')->name('room-create');
       Route::any('edit/{id}', 'RoomsController@edit')->name('room-edit');
       Route::any('update/{id}','RoomsController@update')->name('room-update');
       Route::any('delete/{id}', 'RoomsController@destroy')->name('room-delete');
@@ -67,11 +64,11 @@ Auth::routes();
   
 
    Route::group(['prefix'=>'tenant-image'], function(){
-      Route::get('create','ImageController@create')->name('tenant-image-create');
-      Route::post('store','ImageController@store')->name('tenant-image-store');
       Route::get('show','ImageController@show')->name('tenant-image-show');
       Route::get('index','ImageController@index')->name('tenant-image-index');
+      Route::get('create','ImageController@create')->name('tenant-image-create');
+      Route::post('store','ImageController@store')->name('tenant-image-store');
       Route::post('edit/{id}','ImageController@edit')->name('tenant-image-edit');
       Route::delete('delete/{id}','ImageController@destroy')->name('tenant-image-delete');
-   });   
+   });
 });
