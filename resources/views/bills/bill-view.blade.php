@@ -21,7 +21,7 @@
    </section>
    <section class="content">
       <div class="container-fluid">
-         @if (session('success'))
+         @if (Session::has('success'))
          <div class="alert alert-primary alert-dismissible col-md-4 offset-4">
              <button type="button" class="close" data-dismiss="alert">&times;</button>
              <strong>{{ session('success') }}</strong>
@@ -39,7 +39,7 @@
                      <div class="col-12">
                         <h4>
                            <i class="fas fa-globe"></i> Rent Care
-                           <small class="float-right">Invoice Date: <span class="text-danger"> {{ $bills->user->created_at }} </span> </small>
+                           <small class="float-right">Invoice Date: <span class="text-danger"> {{ $bills->user->created_at->format('d/m/Y') }} </span> </small>
                         </h4>
                      </div>
                      <!-- /.col -->

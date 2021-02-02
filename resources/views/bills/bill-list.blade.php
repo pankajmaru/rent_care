@@ -8,7 +8,7 @@
             your Data Deleted Successfully!!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>           
+            </button>
         </div>
         <div class="col-md-4 offset-4">
             @if (session('success'))
@@ -18,8 +18,8 @@
                 </div>
                 @endif
         </div>
-        <div class="container-fluid">            
-            <div class="row mb-2">                
+        <div class="container-fluid">
+            <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 id="btn"> Bill lists</h1>
                 </div>
@@ -42,7 +42,7 @@
                             <div class="row">
                                 <nav class="navbar navbar-light">
                                     {!! Form::open(['method' => 'get','route' => 'bill-index','class' => 'form-inline']) !!}
-                                        {!! Form::text('search', $value = request('search'), ['placeholder' => 'Search By Name','aria-label' => 'Search','class' => 'form-control']) !!}
+                                        {!! Form::text('search', $value = request('search'), ['placeholder' => 'Search Name, Room, invoice','aria-label' => 'Search','class' => 'form-control']) !!}
                                         <br>
                                         {!! Form::selectMonth('month',$value = request('month'), ['placeholder' => 'Search By Month','aria-label' => 'Search','class' => 'form-control ml-3']) !!}
                                         <br>
@@ -88,7 +88,7 @@
                                     <td>
                                         <a href="{{ route('bill-view',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>
                                         <a href="{{ route('bill-edit',[$bill->id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('bill-delete',[$bill->id]) }}" type="button" class="btn btn-primary">Delete</a>
+                                        <a href="{{ route('bill-delete',[$bill->id]) }}" type="button" class="btn btn-primary" onClick="return confirm('Are You Sure Want to Delete?')">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -98,16 +98,16 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <!-- /.col -->                               
+                <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
         <div class="row">
             <div class="col-md-5 offset-5 mt-3">
-                <span>{{ $bills->links() }}</span>
+                {{-- <span>{{ $bills->links() }}</span> --}}
             </div>
-        </div> 
+        </div>
     </section>
     <!-- /.content -->
 </div>

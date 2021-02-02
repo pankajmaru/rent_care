@@ -1,6 +1,12 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+    @include('layouts.partials.head')
+
+    <body class="hold-transition sidebar-mini layout-fixed">
+
+        @include('layouts.app')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,4 +52,8 @@
         </div>
     </div>
 </div>
-@endsection
+
+@include('layouts.partials.footerscripts')
+
+</body>
+</html>

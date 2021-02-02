@@ -1,11 +1,17 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
+    @include('layouts.partials.head')
+
+    <body class="hold-transition sidebar-mini layout-fixed">
+
+        @include('layouts.app')
+
+<div class="container" style="margin-top:152px">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header bg-warning">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -44,4 +50,7 @@
         </div>
     </div>
 </div>
-@endsection
+@include('layouts.partials.footerscripts')
+
+</body>
+</html>

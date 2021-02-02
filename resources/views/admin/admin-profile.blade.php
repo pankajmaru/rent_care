@@ -31,7 +31,7 @@
                             <a href="{{ route('edit-admin-profile',$images->id) }}"><i
                                     class="fas fa-user-edit fa-2x text-primary link"></i> Edit Profile</a>
                             <div class="text-center">
-                                <img class="profile-user-img img-circle" src="{{ asset('/images').'/'.$images->admin_image }}" alt="User profile picture">
+                                <img class="profile-user-img img-circle" src="{{ asset('/images').'/'.$images->admin_image }}" style="width: 140px; height: 140px;" alt="User profile picture" width="32px" height="120px">
                                     <br>
                                 <a href="#" class="display-4">
                                     {{ Auth::user()->name }}

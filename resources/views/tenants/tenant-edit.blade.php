@@ -35,6 +35,7 @@
                         {!! Form::model($users, array('route' => array('tenant-update',$users->id),'files'=>'true')) !!}
                         {{-- {{!! Form::open(['route' => ('tenant-update'$users->id),'class'=>'form-control','files'=>true]) !!}} --}}
                         @csrf
+                        @method('post')
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6">

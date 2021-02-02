@@ -22,8 +22,8 @@ class RoomsController extends Controller
             $search_text = $request->search;
             $query->where('rooms.rent_amount', 'like', '%' . $search_text . '%')
             ->orWhere('rooms.room_number', 'like', '%' . $search_text . '%');
-        }   
-        
+        }
+
         $rooms = $query->orderBy('room_id', 'DESC')->paginate(5);
         return view('rooms.room-list',['rooms'=>$rooms]);
     }
@@ -91,8 +91,8 @@ class RoomsController extends Controller
     {
         $validated = $request->validate([
             'room_number' => 'required',
-            'rent_amount' => 'required'            
-        ]);        
+            'rent_amount' => 'required'
+        ]);
         $rooms = Room::where('room_id', $id)->update([
             'room_number' => $request->room_number,
             'rent_amount' => $request->rent_amount,

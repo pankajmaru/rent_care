@@ -1,5 +1,4 @@
 @extends('layouts.front-layout')
-
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -18,7 +17,7 @@
         </div>
         <div class="col-md-4 offset-4">
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible">
+                <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>{{ session('success') }}</strong>
                 </div>
@@ -61,7 +60,7 @@
                                 </button>
                                 {!! Form::close() !!}
                             </nav>
-                           
+
                         </div> --}}
                         <!-- /.card-header -->
                         <table id="example2" class="table table-bordered table-hover table-striped">
@@ -102,7 +101,7 @@
                                     <td>
                                         <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>
                                         <a href="{{ route('tenant-edit',[$user->id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('tenant-delete', [$user->id]) }}" type="button" class="btn btn-primary">Delete</a>
+                                        <a href="{{ route('tenant-delete', [$user->id]) }}" type="button" class="btn btn-primary" onClick="return confirm('Are You Sure Want to Delete?')">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

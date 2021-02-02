@@ -27,7 +27,8 @@ class LandlordController extends Controller
      */
     public function index()
     {
-        return view('home',['expenses'=>$expenses]);
+        $exp_lists = landlord::all();
+        return view('landlord.landlord-expenses-list',['exp_lists'=>$exp_lists]);
     }
 
     /**
@@ -55,13 +56,13 @@ class LandlordController extends Controller
             'total_water_bill' => 'required',
             'maintenance' => 'required',
         ]);
-
+        
         $landlord_expenses->month = $request->month;
         $landlord_expenses->total_electricity_bill = $request->total_electricity_bill;
         $landlord_expenses->total_water_bill = $request->total_water_bill;
         $landlord_expenses->maintenance = $request->maintenance;
         $landlord_expenses->save();
-        return redirect()->route('add-landlord-expenses')->with('success', 'Expenses Added Successfully');
+        return redirect()->route('index-landlord-expenses')->with('success', 'Expenses Added Successfully');
     }
 
     /**
@@ -81,9 +82,10 @@ class LandlordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $landlords = landlord::find($id);
+        return view('landlord.edit-landlord-expenses',['landlords'=>$landlords]);
     }
 
     /**
@@ -95,7 +97,20 @@ class LandlordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'month' => 'required',
+            'total_electricity_bill' => 'required',
+            'total_water_bill' => 'required',
+            'maintenance' => 'required',
+        ]);
+
+        $landlord_expenses = Landlord::where('id', $id)->first();
+        $landlord_expenses->month = $request->month;
+        $landlord_expenses->total_electricity_bill = $request->total_electricity_bill;
+        $landlord_expenses->total_water_bill = $request->total_water_bill;
+        $landlord_expenses->maintenance = $request->maintenance;
+        $landlord_expenses->save();
+        return redirect()->route('index-landlord-expenses')->with('success', 'Expenses Updated Successfully');
     }
 
     /**
@@ -106,6 +121,7 @@ class LandlordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $landlords = landlord::where('id', $id)->delete();
+        return redirect()->route('index-landlord-expenses')->with('success','Expenses Deleted Successfully');
     }
 }

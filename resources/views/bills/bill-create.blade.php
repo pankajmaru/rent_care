@@ -28,7 +28,7 @@
                             <div class="row">                                
                                 <div class="form-group col-md-6">
                                     {!! Form::label('name', 'Name', ['class' => 'col-md-6 control-label']) !!}
-                                    {!! Form::select('user_id', $users, $value = ['users' => 'id'] , ['class' => 'form-control', 'placeholder' => 'Select Name']) !!}
+                                    {!! Form::select('user_id', $users, $value = ['users' => 'id'], ['class' => 'form-control', 'placeholder' => 'Select Name']) !!}
                                     @if ($errors->has('user_id'))
                                     <span style="color:red;">{{ $errors->first('user_id') }}</span>
                                     @endif

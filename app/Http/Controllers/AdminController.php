@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -33,7 +34,7 @@ class AdminController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        
+
         //
     }
 
@@ -44,11 +45,10 @@ class AdminController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        
+
         //
 
     }
-
     /**
      * Display the specified resource.
      *
@@ -58,7 +58,7 @@ class AdminController extends Controller {
     public function show(){
 
         $images = Admin::first();
-        return view('admin.admin-profile', ['images'=>$images]);
+        return view('admin.admin-profile',['images'=>$images]);
     }
 
     /**
@@ -67,10 +67,10 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id){
 
         $profile = Admin::find($id);
-        return view('admin.edit-admin-profile', ['profile'=>$profile]);
+        return view('admin.edit-admin-profile',['profile'=>$profile]);
     }
 
     /**
@@ -80,26 +80,30 @@ class AdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     
+
     public function update(Request $request, $id) {
-        $validated=$request->validate([ 
+
+        $validated=$request->validate([
             'name' => 'required',
             'image' => 'required'
             ]);
-        $admin = Admin::where('id', $id)->first();
-        $admin->name=$request->name;
-        $admin->admin_image=$request->image;
-        
-        if ($request->hasFile('image')){            
-            $files = $request->file('image');            
+            $admin = Admin::where('id', $id)->first();
+            $admin->name=$request->name;
+            $admin->admin_image=$request->image;
+
+            if ($request->hasFile('image')){
+            $files = $request->file('image');
+            $upload_path = public_path('images/');
             $filename = $files->getClientOriginalName();
             $extension = $files->getClientOriginalExtension();
             $fileName = microtime().".".$extension;
-            $files->move(public_path('images/'), $fileName);
+            $files->move($upload_path, $fileName);
+            \File::copy($upload_path.$fileName,public_path('dist/img/').$fileName);
             $admin->admin_image = $fileName;
         }
+
         $admin->save();
-        return redirect()->route('admin-profile')->with('success', 'Profile Updated Successfully');
+        return redirect()->route('admin-profile')->with('success','Profile Updated Successfully');
     }
 
     /**

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Http\File;
 use App\Http\Requests\StoreUsers;
 use App\User;
@@ -17,6 +16,7 @@ use App\Bill;
 use App\Admin;
 use App\UserImage;
 use App\AdminExpenses;
+use App\landlord;
 
 class UsersController extends Controller
 {
@@ -25,23 +25,23 @@ class UsersController extends Controller
         $users = User::count();
         $total_bills = Bill::pluck('net_amount')->sum();
         $total_dues = Bill::pluck('total_dues')->sum();
-        $expenses = AdminExpenses::pluck('maintenance')->sum();
-        return view('home',['users'=>$users,'total_bills'=>$total_bills,'total_dues'=>$total_dues,'expenses'=>$expenses]);
+        $landlord_expenses = landlord::pluck('maintenance')->sum();
+        return view('home',['users'=>$users,'total_bills'=>$total_bills,'total_dues'=>$total_dues,'landlord_expenses'=>$landlord_expenses]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $query = User::query();
-        
+
         if($request->has('year') && $request->year != '' ){
             $query->whereYear('users.created_at',$request->year);
         }
-        if($request->has('month') && $request->month != '' ){            
+        if($request->has('month') && $request->month != '' ){
             $query->whereMonth('users.created_at',$request->month);
         }
         if ($request->has('search') &&  $request->search != '')
@@ -147,24 +147,25 @@ class UsersController extends Controller
             'image' => 'required'
         ]);
 
-        $users = User::where('id', $id);
+        $users = User::where('id', $id)->first();
         $users->first_name = $request->first_name;
         $users->last_name = $request->last_name;
         $users->mobile_number = $request->mobile_number;
-        $users->room_id = $request->room_id;
-        // $users->save();
+        $users->room_id = $request->room_number;
+        $users->save();
 
-        if($request->hasfile('image')){
+        if($request->hasFile('image'))
+        {
             $img = $request->file('image');
-            $userImages = UserImage::where('id', $id);
-            // $userImages->user_id = $users->id;
+            $userImages = new UserImage;
+            $userImages->user_id = $users->id;
             $imageName = microtime().'.'.$img->extension();
             $img->move(public_path('images'), $imageName);
             $userImages->image = $imageName;
             $userImages->save();
         }
         return redirect()->route('tenant-index')->with('success', 'Tenant Updated Successfully');
-    }        
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -177,6 +178,4 @@ class UsersController extends Controller
         $users = User::where('id', $id)->delete();
         return back()->withInput()->with('success', 'Tenant Deleted Successfully');
     }
-    
-    
 }

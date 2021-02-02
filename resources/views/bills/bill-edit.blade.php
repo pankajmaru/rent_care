@@ -23,6 +23,7 @@
                         <!-- info row -->
                         {!! Form::model($bills, array('route' => array('bill-update',$bills->id))) !!}                        
                         @csrf
+                        @method('get')
                         <div class="card-body">
                             <div class="row">                                
                                 <div class="form-group col-md-6">
@@ -49,7 +50,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     {!! Form::label('mobile Number', 'Mobile Number', ['class' => 'col-md-6 control-label']) !!}
-                                    {!! Form::text('mobile_number', $value = old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number']) !!}
+                                    {!! Form::text('mobile_number', $value = $bills->user->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number']) !!}
                                     @if ($errors->has('mobile_number'))
                                     <span style="color:red;">{{ $errors->first('mobile_number') }}</span>
                                     @endif
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                  {!! Form::label('rent amount', 'Rent Amount', ['class' => 'col-md-6 control-label']) !!}
-                                 {!! Form::text('rent_amount', $value = old('rent_amount'), ['class' => 'form-control', 'placeholder' => 'Rent Amount']) !!}                                    
+                                 {!! Form::text('rent_amount', $value = $bills->room->rent_amount, ['class' => 'form-control', 'placeholder' => 'Rent Amount']) !!}                                    
                                     @if ($errors->has('rent_amount'))
                                     <span style="color:red;">{{ $errors->first('rent_amount') }}</span>
                                     @endif

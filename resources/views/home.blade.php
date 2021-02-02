@@ -1,5 +1,4 @@
 @extends('layouts.front-layout')
-
 @section('content')
 
 <div class="content-wrapper">
@@ -22,7 +21,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">      
+    <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -50,7 +49,7 @@
               <div class="icon">
                 <i class="fas fa-users"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('tenant-index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -72,7 +71,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3> <i class="fas fa-rupee-sign"></i> {{ $expenses }}</h3>
+                <h3> <i class="fas fa-rupee-sign"></i> {{ $landlord_expenses }}</h3>
                 <p>Total Expenses</p>
               </div>
               <div class="icon">
@@ -84,8 +83,8 @@
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
-              <div class="inner">                
-                <h3><i class="fas fa-rupee-sign"></i> {{  $total_profit = $total_bills - $total_dues - $expenses }} </h3>
+              <div class="inner">
+                <h3><i class="fas fa-rupee-sign"></i> {{  $total_profit = $total_bills - $total_dues - $landlord_expenses }} </h3>
                 <p>Total Profit</p>
               </div>
               <div class="icon">
@@ -97,12 +96,11 @@
           <!-- ./col -->
         </div>
         <!-- /.row -->
-        <!-- Main row -->        
+        <!-- Main row -->
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 @endsection

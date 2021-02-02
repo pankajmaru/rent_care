@@ -10,7 +10,7 @@
                     <h1>Add New Tenant</h1>
                 </div>
             </div>
-        </div>        
+        </div>
     </section>
     <!-- Main content -->
     <section class="content">

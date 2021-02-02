@@ -495,8 +495,8 @@
             </section>
             <section id="invoice-info">
                 <div>
-                    <span>Bill Issue Date:-</span>
-                    <span>{{ $bills->created_at  }}</span>
+                    <span>Bill Isuue Date</span>
+                    <span>{{ $bills->created_at->format('d/m/Y')  }}</span>
                     <span>Invoice Number:-</span>
                     <span id="number">{{ $bills->invoice_number  }}</span>
                 </div>          

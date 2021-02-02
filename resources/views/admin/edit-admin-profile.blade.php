@@ -39,9 +39,9 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-8 offset-2">
-                                {!! Form::label('image', 'Image Upload', ['class' => 'col-md-6 control-label']) !!}
+                                {!! Form::label('image','Image Upload', ['class' => 'col-md-6 control-label']) !!}
                                 <br>
-                                {!! Form::file('image', ['class' => 'form-control']); !!}
+                                {!! Form::file('image', ['class' => 'form-control']) !!}
                                 @if ($errors->has('image'))
                                 <span style="color:red;">{{ $errors->first('image') }}</span>
                                 @endif
@@ -51,7 +51,7 @@
                         <div class="card-footer text-center">
                             <button class="btn btn-primary" type="submit" name="submit" value="Submit"> Submit </button>
                         </div>
-                        {!! Form::close() !!}                      
+                        {!! Form::close() !!}
                         </div>
                         <!-- /.card-body -->
                     </div>

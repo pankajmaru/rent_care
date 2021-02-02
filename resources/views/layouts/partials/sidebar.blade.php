@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('dashboard') }}" class="brand-link">
+        <a href="{{ route('dashboard') }}" class="brand-link">
         <img src="{{ URL::asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light"> Rent Care </span>
@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ URL::asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">                
+                <img src="{{ asset('/images').'/'.$image->admin_image }}" style="width: 40px; height: 40px;" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{{ route('admin-profile') }}">
@@ -25,11 +25,11 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard<i class="fas fa-angle-left right"></i></p>                        
-                    </a>                    
+                        <p>Dashboard<i class="fas fa-angle-left right"></i></p>
+                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item ml-3">
-                            <a href="{{ route('dashboard') }}" class="nav-link">
+                                    <a href="{{ route('dashboard') }}" class="nav-link">
                                 <i class="far fa-circle ml-3"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -39,21 +39,27 @@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Landlord Management<i class="fas fa-angle-left right"></i></p>                        
-                    </a>                    
+                        <p>Landlord Management<i class="fas fa-angle-left right"></i></p>
+                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item ml-3">
-                            <a href="{{ route('add-landlord-expenses') }}" class="nav-link">
+                            <a href="{{ route('create-landlord-expenses') }}" class="nav-link">
                                 <i class="far fa-circle ml-3"></i>
                                 <p>Landlord Expenses</p>
                             </a>
                         </li>
-                        <li class="nav-item ml-3">
+                        {{-- <li class="nav-item ml-3">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle ml-3"></i>
                                 <p>Document Wallet</p>
                             </a>
-                        </li>
+                        </li>                         --}}
+                        <li class="nav-item ml-3">
+                            <a href="{{ route('index-landlord-expenses') }}" class="nav-link">
+                                <i class="far fa-circle ml-3"></i>
+                                <p>Landlord Expenses Lists</p>
+                            </a>
+                        </li> 
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -76,7 +82,7 @@
                                 <p class="ml-2">Tenant List</p>
                             </a>
                         </li>
-                    </ul>                  
+                    </ul>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="{{ route('dashboard') }}" class="nav-link">
@@ -109,7 +115,7 @@
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">                       
+                    <ul class="nav nav-treeview">
                         <li class="nav-item ml-3">
                             <a href="{{ route('room-create') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-plus"></i>
@@ -120,7 +126,7 @@
                             <a href="{{ route('room-index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-stream"></i>
                                 <p>Rooms Lists</p>
-                            </a>                       
+                            </a>
                     </ul>
                 </li>
             </ul>
