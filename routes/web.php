@@ -36,15 +36,8 @@
          Route::get('delete/{id}','BillsController@destroy')->name('bill-delete');
          Route::get('mail/send/{id}', 'BillsController@send')->name('bill-mail-send');
          Route::get('pdf/generate/{id}', 'BillsController@pdf')->name('bill-pdf-generate');
-      });
+         Route::get('get-user-info/{id?}', 'BillsController@getUserInfo')->name('get-user-info');
 
-      Route::group(['prefix'=>'landlord'], function(){
-         Route::get('expenses-index', 'LandlordController@index')->name('index-landlord-expenses');
-         Route::get('expenses-store', 'LandlordController@store')->name('store-landlord-expenses');
-         Route::get('expenses-create', 'LandlordController@create')->name('create-landlord-expenses');
-         Route::get('expenses-edit/{id}', 'LandlordController@edit')->name('edit-landlord-expenses');
-         Route::get('expenses-update/{id}', 'LandlordController@update')->name('update-landlord-expenses');
-         Route::get('expenses-delete/{id}', 'LandlordController@destroy')->name('delete-landlord-expenses');
       });
 
       Route::group(['prefix'=>'tenant'], function(){
@@ -55,6 +48,15 @@
          Route::get('edit/{id}', 'UsersController@edit')->name('tenant-edit');
          Route::post('update/{id}','UsersController@update')->name('tenant-update');
          Route::get('delete/{id}', 'UsersController@destroy')->name('tenant-delete');
+      });
+
+      Route::group(['prefix'=>'landlord'], function(){
+         Route::get('expenses-index', 'LandlordController@index')->name('index-landlord-expenses');
+         Route::get('expenses-store', 'LandlordController@store')->name('store-landlord-expenses');
+         Route::get('expenses-create', 'LandlordController@create')->name('create-landlord-expenses');
+         Route::get('expenses-edit/{id}', 'LandlordController@edit')->name('edit-landlord-expenses');
+         Route::get('expenses-update/{id}', 'LandlordController@update')->name('update-landlord-expenses');
+         Route::get('expenses-delete/{id}', 'LandlordController@destroy')->name('delete-landlord-expenses');
       });
 
       Route::group(['prefix'=>'room'], function(){

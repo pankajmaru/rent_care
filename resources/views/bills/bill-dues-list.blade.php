@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 id="btn"> Tenant List </h1>
+                    <h1 id="btn"> Tenant Dues List </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -34,11 +34,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <nav class="navbar navbar-light">
-                                    <div class="col-md-12">
-                                        {{-- <div class="col mr-2">
-                                            <a href=""></a>
-                                            <i class="fas fa-search"></i>
-                                        </div> --}}
+                                    {{-- <div class="col-md-12">
                                         {!! Form::open(['method' => 'get', 'route' => 'tenant-index', 'role' => 'form', 'class' => 'form-inline']) !!}
                                             {!! Form::text('search', $value = request('search'), ['placeholder' => 'Search By Name,Room','aria-label' => 'Search','class' => 'form-control']) !!}
                                             <br>
@@ -48,10 +44,10 @@
                                             <br>
                                             <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit"> Search </button>
                                         {!! Form::close() !!}
-                                    </div>
+                                    </div> --}}
                                 </nav>
                             </div>
-                            <a href="{{ route('tenant-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a>
+                            {{-- <a href="{{ route('tenant-create') }}" type="button" class="btn btn-primary float-right font-weight-bold text-light">Add Tenant</a> --}}
                         </div>
                         {{-- <div class="card-header">
                             <nav class="navbar navbar-light">
@@ -73,7 +69,7 @@
                                     <th>Last Name</th>
                                     <th>Mobile Number</th>
                                     <th>Room Number</th>
-                                    <th>Image</th>
+                                    {{-- <th>Image</th> --}}
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -84,25 +80,25 @@
                                 $pageNumber = isset($_GET['page']) ? $_GET['page'] : 1 ;
                                 $currentNumber = ($pageNumber - 1) * $numElementsPerPage + $number;
                                 @endphp
-                                @foreach ($users as $user)
+                                @foreach ($bills as $bill)
                                 <tr>
                                     <td>{{ $currentNumber++ }}</td>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->first_name }}</td>
-                                    <td>{{ $user->last_name }}</td>
-                                    <td>{{ $user->mobile_number }}</td>
-                                    <td>{{ $user->get_room->room_number??'nullroom' }}</td>
-                                    <td>
-                                        @if(!empty($user->get_images))
+                                    <td>{{ $bill->id }}</td>
+                                    <td>{{ $bill->user->first_name }}</td>
+                                    <td>{{ $bill->user->last_name }}</td>
+                                    <td>{{ $bill->user->mobile_number }}</td>
+                                    <td>{{ $bill->get_room->room_number??'nullroom' }}</td>
+                                    {{-- <td>
+                                         @if(!empty($user->get_images))
                                         @foreach ($user->get_images as $images)
                                         <img src="{{ asset('/images').'/'.$images->image }}" height="20px" width="20px">
                                         @endforeach
                                         @endif
-                                    </td>
+                                    </td>--}}
                                     <td>
-                                        <a href="{{ route('tenant-show',[$user->id]) }}" type="button" class="btn btn-danger">View</a>
-                                        <a href="{{ route('tenant-edit',[$user->id]) }}" type="button" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('tenant-delete', [$user->id]) }}" type="button" class="btn btn-primary" onClick="return confirm('Are You Sure Want to Delete?')">Delete</a>
+                                        <a href="{{ route('tenant-show',[$bill->id]) }}" type="button" class="btn btn-danger">View</a>
+                                        <a href="{{ route('tenant-edit',[$bill->id]) }}" type="button" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('tenant-delete', [$bill->id]) }}" type="button" class="btn btn-primary" onClick="return confirm('Are You Sure Want to Delete?')">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -121,7 +117,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 offset-5 text-center mt-3 mb-3">
-                <span>{{ $users->links() }}</span>
+                {{-- <span>{{ $users->links() }}</span> --}}
             </div>
         </div>
     </div>

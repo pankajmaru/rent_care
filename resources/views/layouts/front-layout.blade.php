@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('layouts.partials.head')
+
     <body class="hold-transition sidebar-mini layout-fixed">
 
           @include('layouts.partials.header') 
@@ -13,5 +14,7 @@
 
           @include('layouts.partials.footerscripts')
 
-    </body>
+          @yield('scripts')
+
+        </body>
 </html>

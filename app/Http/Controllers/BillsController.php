@@ -14,6 +14,7 @@
     use Illuminate\Http\File;
     use App\Http\Requests\StoreUsers;
     use App\Mail\TestMail;
+    use Redirect,Response;
     use App\AdminExpenses;
     use App\UserImage;
     use App\Admin;
@@ -70,6 +71,8 @@
          */
         public function create()
         {
+
+            
             $users = User::pluck('first_name','id');
             $rooms = Room::pluck('room_number','room_id');
             $rent = Room::pluck('rent_amount','room_id');
@@ -94,6 +97,8 @@
                 'rent_amount' => 'required',
                 'electricity_unit' => 'required',
                 'water_unit' => 'required',
+                'total_paid' => 'required',
+                'total_dues' => 'required',
                 ]);
 
             $bills = new Bill;
@@ -240,4 +245,16 @@
         $output .= '</table>';
         return $output;
         }
-    }
+
+        public function getUserInfo($id = null){
+
+            $user = User::where('id',$id)->first();
+            $data = array() ; 
+            $data['mobile_number'] = $user->mobile_number ; 
+            $data['room_id'] = $user->room_id ; 
+            $data['rent_amount'] = $user->get_room->rent_amount ?? 0 ; 
+
+            return response()->json($data, 200);
+
+        }
+}

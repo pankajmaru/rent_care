@@ -1,4 +1,3 @@
-
 <!-- jQuery -->
 <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -8,6 +7,7 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
+
 <script src="{{ URL::asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
 <script src="{{ URL::asset('plugins/chart.js/Chart.min.js') }}"></script>
