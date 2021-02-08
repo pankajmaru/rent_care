@@ -21,6 +21,7 @@
     use App\Bill;
     use App\User;
     use App\Room;
+    use App\Site;
     use PDF;
     use Mail;
     use snappy;
@@ -71,12 +72,11 @@
          */
         public function create()
         {
-
-            
             $users = User::pluck('first_name','id');
             $rooms = Room::pluck('room_number','room_id');
             $rent = Room::pluck('rent_amount','room_id');
-            return view('bills.bill-create',['users'=>$users,'rooms'=>$rooms,'rent'=>$rent]);
+            $sites = Site::pluck('water_per_unit','elec_per_unit');
+            return view('bills.bill-create',['users'=>$users,'rooms'=>$rooms,'rent'=>$rent,'sites'=>$sites]);
         }
 
         /**
@@ -105,12 +105,12 @@
             $bills->user_id = $request->user_id;
             $bills->room_id = $request->room_number;
             $rentamount = $bills->room->rent_amount;
-            $toal_elce_unit = $request->electricity_unit * '9';
-            $toal_water_unit = $request->water_unit * '9';
-            $total_rent_amount = $rentamount + $toal_elce_unit + $toal_water_unit;
+            $total_elec_unit =  $request->electricity_unit * '9';
+            $total_water_unit = $request->water_unit * '9';
+            $total_rent_amount = $rentamount + $total_elec_unit + $total_water_unit;
             $bills->invoice_number = $request->invoice_number;
-            $bills->electricity_unit = $toal_elce_unit;
-            $bills->water_unit = $toal_water_unit;
+            $bills->electricity_unit = $total_elec_unit;
+            $bills->water_unit = $total_water_unit;
             $bills->from_date = $request->from_date;
             $bills->to_date = $request->to_date;
             $bills->net_amount = $total_rent_amount;
@@ -246,15 +246,27 @@
         return $output;
         }
 
+        // for AJAX emthod //
         public function getUserInfo($id = null){
-
             $user = User::where('id',$id)->first();
-            $data = array() ; 
-            $data['mobile_number'] = $user->mobile_number ; 
-            $data['room_id'] = $user->room_id ; 
-            $data['rent_amount'] = $user->get_room->rent_amount ?? 0 ; 
-
+            $data = array();
+            $data['mobile_number'] = $user->mobile_number ;
+            $data['room_id'] = $user->room_id ;
+            $data['rent_amount'] = $user->get_room->rent_amount ?? 0 ;
             return response()->json($data, 200);
+        }
 
+        public function getRentInfo($id = null){// dont know why we give here value null to $id //
+            $room = Room::where('room_id',$id)->first();
+            $data = array();
+            $data['rent_amount'] = $room->rent_amount;
+            return response()->json($data, 200);
+        }
+
+        public function getUnitInfo($id = null){// dont know why we give here value null to $id //
+            $room = Room::where('room_id',$id)->first();
+            $data = array();
+            $data['rent_amount'] = $room->rent_amount;
+            return response()->json($data, 200);
         }
 }

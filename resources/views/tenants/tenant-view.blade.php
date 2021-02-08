@@ -38,7 +38,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label>First Name</label>                                    
+                                    <label>First Name</label>
                                     <input type="text" class="form-control" placeholder="First Name" name="first_name"
                                         value="{{ $user->first_name  }}" disabled>
                                     <span style="color:red;"></span>
@@ -51,17 +51,15 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" placeholder="Mobile Number"
-                                        name="mobile_number" value="{{ $user->mobile_number  }}" disabled>
+                                    <input type="text" class="form-control" placeholder="Mobile Number" name="mobile_number" value="{{ $user->mobile_number  }}" disabled>
                                     <span style="color:red;"></span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Room Number</label>
-                                    <input type="text" class="form-control" placeholder="Room Number" name="room_number"
-                                        value="{{ $user->get_room->room_number ?? 'null' }}" disabled>
+                                    <input type="text" class="form-control" placeholder="Room Number" name="room_number" value="{{ $user->get_room->room_number ?? 'null' }}" disabled>
                                     <span style="color:red;"></span>
                                 </div>
-                                <div class="row ml-3 mt-5">                                    
+                                <div class="row ml-3 mt-5">
                                     @if(!empty($user->get_images))
                                     @foreach ($user->get_images as $images)
                                     <img src="{{ asset('/images').'/'.$images->image }}" width="250px" height="250px">

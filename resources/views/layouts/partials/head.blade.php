@@ -24,4 +24,10 @@
   <link rel="stylesheet" href="{{ URL::asset('plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {{-- remove disabled color attribute in forms  --}}
+  <style>
+   .form-control:disabled{
+     background-color: #ffffff;
+   }
+ </style>
 </head>

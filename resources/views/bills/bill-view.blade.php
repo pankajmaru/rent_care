@@ -83,13 +83,13 @@
                                  <td class="text-right text-danger"><b> {{ $bills->room->rent_amount }} </b></td>
                               </tr>
                               <tr>
-                                 <th style="width:50%">Electricity Unit:-</th>
+                                 <th style="width:50%">Electricity Unit @ <span class="text-danger">{{ $bills->site->elec_per_unit ?? 'null' }} unit</span> </th>
                                  <td class="text-right text-danger"><b> {{ $bills->electricity_unit }} </b></td>
                               </tr>
                               <tr>
                                  <th style="width:50%">Water Unit:-</th>
                                  <td class="text-right text-danger"><b> {{ $bills->water_unit }} </b></td>
-                              </tr>                              
+                              </tr>
                               <tr class="border border-bottom-1 border-right-0">
                                  <th>Net Amount:-</th>
                                  <td class="text-right text-danger">
@@ -99,7 +99,7 @@
                                  </td>
                               </tr>
                            </table>
-                           <a href="{{ route('bill-pdf-generate',[$bills->id]) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">                              
+                           <a href="{{ route('bill-pdf-generate',[$bills->id]) }}" type="button" class="btn btn-primary float-right text-light" style="margin-right: 5px;">
                               <i class="fas fa-file-pdf mr-1"></i>
                               Generate PDF
                            </a>

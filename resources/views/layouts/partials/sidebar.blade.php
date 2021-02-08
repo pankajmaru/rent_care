@@ -129,6 +129,29 @@
                             </a>
                     </ul>
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
+                        <i class="fas fa-bolt mr-2"></i>
+                        <p class="ml-2">
+                            Site Management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-3">
+                            <a href="{{ route('site-create') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>Add Unit</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="{{ route('room-index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-stream"></i>
+                                <p>Unit Lists</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

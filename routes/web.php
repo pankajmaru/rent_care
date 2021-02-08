@@ -26,6 +26,11 @@
          Route::post('update-profile/{id}', 'AdminController@update')->name('update-admin-profile');
       });
 
+      Route::group(['prefix'=>'site'], function(){
+         Route::get('create', 'SiteController@create')->name('site-create');
+         Route::get('store', 'SiteController@store')->name('site-store');
+      });
+
       Route::group(['prefix'=>'bill'], function(){
          Route::get('index','BillsController@index')->name('bill-index');
          Route::post('store','BillsController@store')->name('bill-store');
@@ -37,7 +42,7 @@
          Route::get('mail/send/{id}', 'BillsController@send')->name('bill-mail-send');
          Route::get('pdf/generate/{id}', 'BillsController@pdf')->name('bill-pdf-generate');
          Route::get('get-user-info/{id?}', 'BillsController@getUserInfo')->name('get-user-info');
-
+         Route::get('get-room-info/{id?}', 'BillsController@getRentInfo')->name('get-room-info');
       });
 
       Route::group(['prefix'=>'tenant'], function(){

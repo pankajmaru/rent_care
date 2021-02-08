@@ -16,5 +16,10 @@ class Bill extends Model
     public function room()
     {
         return $this->belongsTo('App\Room','room_id','room_id');
-    }  
+    }
+
+    public function site()
+    {
+        return $this->belongsTo('App\Site','site_id','id');
+    }
 }
